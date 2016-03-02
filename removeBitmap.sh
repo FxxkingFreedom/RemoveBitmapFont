@@ -14,10 +14,12 @@ tmpUIa="tmp-msgUIa.ttf";
 # Main routine
 #
 BASEPATH=$(cd $(dirname $0) && pwd);
+FONTNAME=$2;
 
 if [ $# -eq 0 ]; then
     echo "";
-    echo "Usage: bash /path/to/removeBitmap.sh step{1|2|3}";
+    echo "Usage: bash /path/to/removeBitmap.sh step{1|2|3} fontfile";
+    echo "ex) bash removeBitmap.sh step1 msgothic.ttc";
     echo "";
     exit 1;
 fi
@@ -28,15 +30,15 @@ if [ $1 = "step1" ]
 then
     if [ -f "${DRPBXDIR}/${tmpM}" -a -f "${DRPBXDIR}/${tmpP}" -a -f "${DRPBXDIR}/${tmpUI}" ]; then
         echo "";
-        echo "File exists. Skip step.";
+        echo "Temporary file exists. Skip step.";
         echo "";
         exit 0;
     fi
     
-    if [ -f "${DRPBXDIR}/msgothic.ttc" ]; then
-        cp ${DRPBXDIR}/msgothic.ttc .;
+    if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
+        cp ${DRPBXDIR}/${FONTNAME} .;
         # fontforge -script ${BASEPATH}/BreakeTTC.pe;
-        python ${BASEPATH}/pyFFctrl.py $1 msgothic.ttc ${tmpM} ${tmpP} ${tmpUI};
+        python ${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpM} ${tmpP} ${tmpUI};
         
         if [ -f "${tmpM}" -a -f "${tmpP}" -a -f "${tmpUI}" ]; then
             # sh script for workaround fontforge bug. Thank you ricty team.
@@ -63,10 +65,10 @@ elif [ $1 = "step3" ]
 then
     if [ -f "${DRPBXDIR}/${tmpMa}" -a -f "${DRPBXDIR}/${tmpPa}" -a -f "${DRPBXDIR}/${tmpUIa}" ]; then
         mv ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}} .;
-        python ${BASEPATH}/pyFFctrl.py $1 msgothic.ttc ${tmpMa} ${tmpPa} ${tmpUIa}; # merge by python
+        python ${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpMa} ${tmpPa} ${tmpUIa}; # merge by python
         
-        if [ -f "new_msgothic.ttc" ]; then
-            mv new_msgothic.ttc ${DRPBXDIR}/;
+        if [ -f "new_${FONTNAME}" ]; then
+            mv new_${FONTNAME} ${DRPBXDIR}/;
             rm tmp-msg{M,P,UI}a.ttf;
             echo "";
             echo "End of step 3.";
