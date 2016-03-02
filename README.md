@@ -30,5 +30,6 @@ $ bash removeBitmap.sh step3
 MIT
 
 ## Note
-- まだ未完成なんで、ソース読んで理解した人だけ実行してください。
+- EL Capitan beta 5 で動作確認済み。
+- しかし未完成なので、ソース読んで理解した人だけ実行してください。
 - hinting 調整も python でやりたいなあ...
