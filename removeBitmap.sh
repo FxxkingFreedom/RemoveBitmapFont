@@ -36,7 +36,7 @@ then
     if [ -f "${DRPBXDIR}/msgothic.ttc" ]; then
         cp ${DRPBXDIR}/msgothic.ttc .;
         # fontforge -script ${BASEPATH}/BreakeTTC.pe;
-        python ${BASEPATH}/pyFFctrl.py $1;
+        python ${BASEPATH}/pyFFctrl.py $1 msgothic.ttc ${tmpM} ${tmpP} ${tmpUI};
         
         if [ -f "${tmpM}" -a -f "${tmpP}" -a -f "${tmpUI}" ]; then
             # sh script for workaround fontforge bug. Thank you ricty team.
@@ -47,7 +47,9 @@ then
             # Move ttf files for step 2 by Windows.
             mv tmp-msg{M,P,UI}.ttf ${DRPBXDIR}/;
             rm tmp-msg*.bak;
+            echo "";
             echo "End of step 1.";
+            echo "";
             exit 0;
         fi
     fi
@@ -60,17 +62,20 @@ then
 elif [ $1 = "step3" ]
 then
     if [ -f "${DRPBXDIR}/${tmpMa}" -a -f "${DRPBXDIR}/${tmpPa}" -a -f "${DRPBXDIR}/${tmpUIa}" ]; then
-        mv ${DRPBXDIR}/tmp-msg{M,P,UI}a.ttf .;
-        python ${BASEPATH}/pyFFctrl.py $1; # merge by python
+        mv ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}} .;
+        python ${BASEPATH}/pyFFctrl.py $1 msgothic.ttc ${tmpMa} ${tmpPa} ${tmpUIa}; # merge by python
         
-        if [ -f "newMSGothic.ttc" ]; then
-            mv newMSGothic.ttc ${DRPBXDIR}/;
+        if [ -f "new_msgothic.ttc" ]; then
+            mv new_msgothic.ttc ${DRPBXDIR}/;
             rm tmp-msg{M,P,UI}a.ttf;
-            rm msgothic.ttc;
+            echo "";
             echo "End of step 3.";
+            echo "";
             exit 0;
         else
+            echo "";
             echo "merge fail. check python or fonts.";
+            echo "";
             exit 2;
         fi
     else

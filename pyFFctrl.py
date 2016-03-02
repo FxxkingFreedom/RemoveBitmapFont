@@ -1,37 +1,49 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, fontforge
+import sys, fontforge;
 
-argvs = sys.argv
-argc = len(argvs)
+argvs = sys.argv;
+argc = len(argvs);
+
 
 if argc == 1:
-    print "Usage: python %s step{1|3}" % argvs[0]
+    print "Usage: python %s step{1|3} font-file-name tmp-m tmp-p tmp-ui" % argvs[0]
     quit()
 
 if argvs[1] == "step1":
-    # Breake TTC.
-    font = fontforge.open("msgothic.ttc(MS Gothic)");
-    font.generate('tmp-msgM.ttf');
-    font.close();
+    # TODO: get argvs[2] info by fontforge. and fontforge.open()
     
-    font = fontforge.open("msgothic.ttc(MS UI Gothic)");
-    font.generate("tmp-msgUI.ttf");
+    # Breake TTC.
+    tmpM = argvs[3];
+    tmpP = argvs[4];
+    tmpUI = argvs[5];
+    
+    font = fontforge.open("msgothic.ttc(MS Gothic)");
+    font.generate(tmpM);
     font.close();
     
     font = fontforge.open("msgothic.ttc(MS PGothic)");
-    font.generate("tmp-msgP.ttf");
+    font.generate(tmpP);
+    font.close();
+    
+    font = fontforge.open("msgothic.ttc(MS UI Gothic)");
+    font.generate(tmpUI);
     font.close();
     
 elif argvs[1] == "step3":
     # Generate TTC.
-    fontM = fontforge.open('tmp-msgMa.ttf');
-    fontP = fontforge.open('tmp-msgPa.ttf');
-    fontUI = fontforge.open('tmp-msgUIa.ttf');
+    tmpMa = argvs[3];
+    tmpPa = argvs[4];
+    tmpUIa = argvs[5];
+    newTTCname = 'new_' + argvs[2];
+    
+    fontM = fontforge.open(tmpMa);
+    fontP = fontforge.open(tmpPa);
+    fontUI = fontforge.open(tmpUIa);
     
     if fontM and fontP and fontUI:
-        fontM.generateTtc('newMSGothic.ttc', (fontP, fontUI), ttcflags = ("merge",), layer = 1);
+        fontM.generateTtc(newTTCname, (fontP, fontUI), ttcflags = ("merge",), layer = 1);
     else:
         pass;
     
