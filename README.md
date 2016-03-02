@@ -6,21 +6,21 @@ python 勉強用。まだ msgothic.ttc 専用。いろいろ決め打ち。未�
 
 ### Step 0
 - Install dropbox, fontforge into Mac or Unix like.
-- make Dropbox/removeBitmap directory. (ex: $HOME/Dropbox/removeBitmap/)
-- copy your msgothic.ttc to that removeBitmap directory.
+- Make 'removeBitmap' directory in Dropbox. (ex: $HOME/Dropbox/removeBitmap/)
+- Copy your msgothic.ttc to that 'removeBitmap' directory.
 
 ### Step 1
-Breake TTC to TTFs. And fix OS/2 version bug of fontforge.
+Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.
 ```
 $ bash removeBitmap.sh step1
 ```
 ### Step 2
 Adjust hinting on Windows.
 ```
-> ttfautohint.exe
+C:\hogehoge> ttfautohint.exe
 ```
 ### Step 3
-Merge TTFs to TrueType Collection.
+Merge TTFs to TTC.
 ```
 $ bash removeBitmap.sh step3
 ```
