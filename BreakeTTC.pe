@@ -1,0 +1,14 @@
+#!/usr/local/bin/fontforge
+
+# Open($1)
+# Generate($2)
+
+# Open("msgothic.ttc(MS Gothic)");SelectAll();DontAutoHint();Generate("aaa-M.ttf");
+# Open("msgothic.ttc(MS PGothic)");SelectAll();DontAutoHint();Generate("aaa-P.ttf");
+# Open("msgothic.ttc(MS UI Gothic)");SelectAll();DontAutoHint();Generate("aaa-UI.ttf");
+
+# or
+
+Open("msgothic.ttc(MS Gothic)");Generate("aaa-M.ttf");
+Open("msgothic.ttc(MS PGothic)");Generate("aaa-P.ttf");
+Open("msgothic.ttc(MS UI Gothic)");Generate("aaa-UI.ttf");
