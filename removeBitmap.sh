@@ -16,9 +16,9 @@ tmpUIa="tmp-msgUIa.ttf";
 BASEPATH=$(cd $(dirname $0) && pwd);
 FONTNAME=$2;
 
-if [ $# -eq 0 ]; then
+if [ $# -lt 2 ]; then
     echo "";
-    echo "Usage: bash /path/to/removeBitmap.sh step{1|2|3} fontfile";
+    echo "Usage: bash /path/to/removeBitmap.sh step{1|2|3} fontfilename";
     echo "ex) bash removeBitmap.sh step1 msgothic.ttc";
     echo "";
     exit 1;
@@ -63,7 +63,7 @@ then
 elif [ $1 = "step2" ]
 then
     echo "";
-    echo "Create ${tmpMa}, ${tmpPa}, ${tmpUIa} by ttfautohint.exe on Windows via Dropbox.";
+    echo "Please create ${tmpMa}, ${tmpPa}, ${tmpUIa} by ttfautohint.exe on Windows via Dropbox.";
     echo "";
     exit 0;
 elif [ $1 = "step3" ]
