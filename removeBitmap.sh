@@ -46,13 +46,18 @@ then
             sh ${BASEPATH}/os2version_reviser.sh ${tmpP};
             sh ${BASEPATH}/os2version_reviser.sh ${tmpUI};
             
-            # Move ttf files for step 2 by Windows.
-            mv tmp-msg{M,P,UI}.ttf ${DRPBXDIR}/;
+            # Move ttf files for step 2.
+            mv {${tmpM},${tmpP},${tmpUI}} ${DRPBXDIR}/;
             rm tmp-msg*.bak;
+            
             echo "";
             echo "End of step 1.";
             echo "";
             exit 0;
+        else
+            echo "";
+            echo "Break TTC fail.";
+            echo "";
         fi
     fi
 elif [ $1 = "step2" ]
@@ -71,15 +76,16 @@ then
             mv new_${FONTNAME} ${DRPBXDIR}/;
             rm ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}};
             rm {${tmpMa},${tmpPa},${tmpUIa}};
+            
             echo "";
             echo "End of step 3.";
             echo "";
             exit 0;
         else
             echo "";
-            echo "merge fail. check pyFFctrl.py.";
+            echo "Merge TTC fail. Check pyFFctrl.py.";
             echo "";
-            exit 2;
+            exit 1;
         fi
     else
         echo "";

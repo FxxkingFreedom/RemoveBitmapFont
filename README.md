@@ -12,7 +12,7 @@ python 勉強用。~~~まだ msgothic.ttc 専用。~~~汎用性向上で msgothi
 ### Step 1
 Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.
 ```
-$ bash removeBitmap.sh step1 hoge.ttc
+$ bash removeBitmap.sh step1 foo.ttc
 ```
 ### Step 2
 Adjust hinting on Windows.
@@ -22,7 +22,7 @@ C:\hogehoge> ttfautohint.exe
 ### Step 3
 Merge TTFs to TTC.
 ```
-$ bash removeBitmap.sh step3 hoge.ttc
+$ bash removeBitmap.sh step3 foo.ttc
 ```
 
 ## LICENSE

@@ -11,24 +11,26 @@ if argc == 1:
     quit()
 
 if argvs[1] == "step1":
-    # TODO: get argvs[2] info by fontforge. and fontforge.open()
-    
-    # Breake TTC.
     tmpM = argvs[3];
     tmpP = argvs[4];
     tmpUI = argvs[5];
     
+    # Get TTC familynames
     fontnames = fontforge.fontsInFile(argvs[2]);
     
-    font = fontforge.open(argvs[2]+"("+fontnames[0]+")");
+    # Breake TTC
+    mFont = "%s(%s)" % (argvs[2], fontnames[0]); # ex: msgothic.ttc(MS Gothic)
+    font = fontforge.open(mFont);
     font.generate(tmpM);
     font.close();
     
-    font = fontforge.open(argvs[2]+"("+fontnames[1]+")");
+    pFont = "%s(%s)" % (argvs[2], fontnames[1]); # ex: msgothic.ttc(MS PGothic)
+    font = fontforge.open(pFont);
     font.generate(tmpP);
     font.close();
     
-    font = fontforge.open(argvs[2]+"("+fontnames[2]+")");
+    uFont = "%s(%s)" % (argvs[2], fontnames[2]); # ex: msgothic.ttc(MS UI Gothic)
+    font = fontforge.open(uFont);
     font.generate(tmpUI);
     font.close();
     
