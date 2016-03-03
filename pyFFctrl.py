@@ -19,6 +19,7 @@ if argvs[1] == "step1":
     fontnames = fontforge.fontsInFile(argvs[2]);
     
     # Breake TTC
+    # TODO: family が 3つだったり 4つだったりするから動的に処理するように
     mFont = "%s(%s)" % (argvs[2], fontnames[0]); # ex: msgothic.ttc(MS Gothic)
     font = fontforge.open(mFont);
     font.generate(tmpM);
