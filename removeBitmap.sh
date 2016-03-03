@@ -34,7 +34,7 @@ if [ "$1" = "step1" ]; then
         # fontforge -script ${BASEPATH}/BreakeTTC.pe;
         python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "$tmpPrefix";
         
-        for tmpTTF in "$(ls . | grep $tmpPrefix)" ; do
+        for tmpTTF in $(ls . | grep "$tmpPrefix") ; do
             if [ -f "$tmpTTF" ]; then
                 # sh script for workaround fontforge bug. Thank you ricty team.
                 sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" &&
