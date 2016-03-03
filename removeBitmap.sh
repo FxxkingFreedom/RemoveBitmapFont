@@ -38,7 +38,7 @@ then
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
         cp "${DRPBXDIR}/${FONTNAME}" .;
         # fontforge -script ${BASEPATH}/BreakeTTC.pe;
-        python "${BASEPATH}"/pyFFctrl.py "$1 ${FONTNAME} ${tmpM} ${tmpP} ${tmpUI}";
+        python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "${tmpM}" "${tmpP}" "${tmpUI}";
         
         if [ -f "${tmpM}" ] && [ -f "${tmpP}" ] && [ -f "${tmpUI}" ]; then
             # sh script for workaround fontforge bug. Thank you ricty team.
@@ -69,8 +69,8 @@ then
 elif [ "$1" = "step3" ]
 then
     if [ -f "${DRPBXDIR}/${tmpMa}" ] && [ -f "${DRPBXDIR}/${tmpPa}" ] && [ -f "${DRPBXDIR}/${tmpUIa}" ]; then
-        cp "${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}}" .;
-        python "${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpMa} ${tmpPa} ${tmpUIa}"; # merge by python
+        cp "${DRPBXDIR}"/{"${tmpMa}","${tmpPa}","${tmpUIa}"} .;
+        python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "${tmpMa}" "${tmpPa}" "${tmpUIa}"; # merge by python
         
         if [ -f "new_${FONTNAME}" ]; then
             mv "new_${FONTNAME}" "${DRPBXDIR}"/;
