@@ -1,6 +1,8 @@
 # bitmap を内包した TrueType Collection から bitmap を削除するスクリプト
 
-python 勉強用。~~~まだ msgothic.ttc 専用。~~~汎用性向上で msgothic.ttc 以外の TTC でも自動的にファミリー名を取得するからおk。でも未完成。
+python 勉強用。~~~まだ msgothic.ttc 専用。~~~汎用性向上で msgothic.ttc 以外の TrueType Collection でも自動的にファミリー名を取得するからおk。でも未完成。
+
+メイリオが一部文字化けしちゃうけど、msgothic.ttc と meiryo.ttc で分解・統合は動作しています。
 
 ## USAGE
 
