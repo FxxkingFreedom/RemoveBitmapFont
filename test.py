@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys,fontforge
+import sys,glob,fontforge
 
 # f = fontforge.fontsInFile('/tmp/msgothic.ttc');
 # for i in f:
@@ -20,7 +20,7 @@ import sys,fontforge
 # font = fontforge.open(argvs[2]+"("+fontnames[2]+")");
 # font.close();
 
-foo = "aaa";
-bar = "bbb";
-hoge = "%s(%s)" % (foo, bar);
-print hoge;
+foo = "tmp-ttf"
+files = glob.glob(foo+'[0-9]a.ttf')
+for file in files:
+    print file

@@ -3,11 +3,9 @@ set -e
 
 # Change for your environment.
 DRPBXDIR="${HOME}/Dropbox/removeBitmap";
-tmpM="tmp-msgM.ttf";
+tmpPrefix="tmp-ttf";
 tmpMa="tmp-msgMa.ttf";
-tmpP="tmp-msgP.ttf";
 tmpPa="tmp-msgPa.ttf";
-tmpUI="tmp-msgUI.ttf";
 tmpUIa="tmp-msgUIa.ttf";
 
 #
@@ -28,7 +26,7 @@ cd /tmp/;
 
 if [ "$1" = "step1" ]
 then
-    if [ -f "${DRPBXDIR}/${tmpM}" ] && [ -f "${DRPBXDIR}/${tmpP}" ] && [ -f "${DRPBXDIR}/${tmpUI}" ]; then
+    if [ -f "${DRPBXDIR}/tmp-ttf0.ttf" ]; then
         echo "";
         echo "Temporary file exists. Skip step.";
         echo "";
@@ -38,44 +36,40 @@ then
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
         cp "${DRPBXDIR}/${FONTNAME}" .;
         # fontforge -script ${BASEPATH}/BreakeTTC.pe;
-        python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "${tmpM}" "${tmpP}" "${tmpUI}";
+        python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "$tmpPrefix";
         
-        if [ -f "${tmpM}" ] && [ -f "${tmpP}" ] && [ -f "${tmpUI}" ]; then
-            # sh script for workaround fontforge bug. Thank you ricty team.
-            sh "${BASEPATH}"/os2version_reviser.sh "${tmpM}";
-            sh "${BASEPATH}"/os2version_reviser.sh "${tmpP}";
-            sh "${BASEPATH}"/os2version_reviser.sh "${tmpUI}";
-            
-            # Move ttf files for step 2.
-            mv {"${tmpM}","${tmpP}","${tmpUI}"} "${DRPBXDIR}"/;
-            rm tmp-msg*.bak;
-            
-            echo "";
-            echo "End of step 1.";
-            echo "";
-            exit 0;
-        else
-            echo "";
-            echo "Break TTC fail.";
-            echo "";
-        fi
+        for tmpTTF in $(ls . | grep "$tmpPrefix"); do
+            if [ -f "$tmpTTF" ]; then
+                # sh script for workaround fontforge bug. Thank you ricty team.
+                sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" &&
+                mv "$tmpTTF" "${DRPBXDIR}"/;
+                rm tmp-ttf*.bak;
+            else
+                echo "$tmpTTF not found.";
+            fi
+        done
+        
+        echo "";
+        echo "End of step 1.";
+        echo "";
+        exit 0;
     fi
 elif [ "$1" = "step2" ]
 then
     echo "";
-    echo "Please create ${tmpMa}, ${tmpPa}, ${tmpUIa} by ttfautohint.exe on Windows via Dropbox.";
+    echo "Please tmp-ttf0a.ttf, tmp-ttf1.ttf, tmp-ttf2.ttf and so on by ttfautohint.exe on Windows.";
     echo "";
     exit 0;
 elif [ "$1" = "step3" ]
 then
-    if [ -f "${DRPBXDIR}/${tmpMa}" ] && [ -f "${DRPBXDIR}/${tmpPa}" ] && [ -f "${DRPBXDIR}/${tmpUIa}" ]; then
-        cp "${DRPBXDIR}"/{"${tmpMa}","${tmpPa}","${tmpUIa}"} .;
-        python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "${tmpMa}" "${tmpPa}" "${tmpUIa}"; # merge by python
+    if ls "${DRPBXDIR}" | grep "${tmpPrefix}[0-9]*a.ttf" ; then
+        cp "${DRPBXDIR}"/"${tmpPrefix}"*a.ttf .;
+        python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "${tmpPrefix}"; # merge by python
         
         if [ -f "new_${FONTNAME}" ]; then
             mv "new_${FONTNAME}" "${DRPBXDIR}"/;
-            rm "${DRPBXDIR}"/{"${tmpMa}","${tmpPa}","${tmpUIa}"};
-            rm {"${tmpMa}","${tmpPa}","${tmpUIa}"};
+            rm "${DRPBXDIR}"/"$tmpPrefix"*;
+            rm "$tmpPrefix"*;
             
             echo "";
             echo "End of step 3.";
@@ -89,7 +83,7 @@ then
         fi
     else
         echo "";
-        echo "${tmpMa}, ${tmpPa}, ${tmpUIa} not found.";
+        echo "*a.ttf not found.";
         echo "";
         exit 0;
     fi
