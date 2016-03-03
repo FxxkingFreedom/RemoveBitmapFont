@@ -13,7 +13,7 @@ tmpUIa="tmp-msgUIa.ttf";
 #
 # Main routine
 #
-BASEPATH="$(cd "$(dirname "$0")" && pwd)";
+BASEPATH="$(cd $(dirname $0) && pwd)";
 FONTNAME=$2;
 
 if [ $# -lt 2 ]; then
