@@ -6,8 +6,10 @@ import sys, glob, fontforge;
 argvs = sys.argv;
 argc = len(argvs);
 
+# TODO: use paramXXXX
 if argc == 1:
     print "Usage: python %s step{1|3} font-file-name prefix" % argvs[0]
+    print "ex, python %s step1 meiryo.ttc tmp-ttf" % argvs[0]
     quit()
 
 if argvs[1] == "step1":
@@ -17,9 +19,9 @@ if argvs[1] == "step1":
     # Breake TTC
     i = 0;
     for familyName in familyNames:
-        familyName = "%s(%s)" % (argvs[2], familyNames[i]); # ex, "msgothic.ttc(MS UI Gothic)"
+        openName = "%s(%s)" % (argvs[2], familyName); # ex, "msgothic.ttc(MS UI Gothic)"
         tmpTTF = "%s%d.ttf" % (argvs[3], i);
-        font = fontforge.open(familyName);
+        font = fontforge.open(openName);
         font.generate(tmpTTF);
         font.close();
         i += 1;
@@ -41,8 +43,8 @@ elif argvs[1] == "step3":
     else:
         pass;
     
-    for f in fontX:
-        f.close();
+    for font in fontX:
+        font.close();
     
 else:
     pass;
