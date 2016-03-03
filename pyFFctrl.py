@@ -6,7 +6,6 @@ import sys, fontforge;
 argvs = sys.argv;
 argc = len(argvs);
 
-
 if argc == 1:
     print "Usage: python %s step{1|3} font-file-name tmp-m tmp-p tmp-ui" % argvs[0]
     quit()
@@ -19,15 +18,17 @@ if argvs[1] == "step1":
     tmpP = argvs[4];
     tmpUI = argvs[5];
     
-    font = fontforge.open("msgothic.ttc(MS Gothic)");
+    fontnames = fontforge.fontsInFile(argvs[2]);
+    
+    font = fontforge.open(argvs[2]+"("+fontnames[0]+")");
     font.generate(tmpM);
     font.close();
     
-    font = fontforge.open("msgothic.ttc(MS PGothic)");
+    font = fontforge.open(argvs[2]+"("+fontnames[1]+")");
     font.generate(tmpP);
     font.close();
     
-    font = fontforge.open("msgothic.ttc(MS UI Gothic)");
+    font = fontforge.open(argvs[2]+"("+fontnames[2]+")");
     font.generate(tmpUI);
     font.close();
     

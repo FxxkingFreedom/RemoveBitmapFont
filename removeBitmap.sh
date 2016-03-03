@@ -64,19 +64,20 @@ then
 elif [ $1 = "step3" ]
 then
     if [ -f "${DRPBXDIR}/${tmpMa}" -a -f "${DRPBXDIR}/${tmpPa}" -a -f "${DRPBXDIR}/${tmpUIa}" ]; then
-        mv ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}} .;
+        cp ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}} .;
         python ${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpMa} ${tmpPa} ${tmpUIa}; # merge by python
         
         if [ -f "new_${FONTNAME}" ]; then
             mv new_${FONTNAME} ${DRPBXDIR}/;
-            rm tmp-msg{M,P,UI}a.ttf;
+            rm ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}};
+            rm {${tmpMa},${tmpPa},${tmpUIa}};
             echo "";
             echo "End of step 3.";
             echo "";
             exit 0;
         else
             echo "";
-            echo "merge fail. check python or fonts.";
+            echo "merge fail. check pyFFctrl.py.";
             echo "";
             exit 2;
         fi

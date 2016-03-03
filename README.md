@@ -1,6 +1,6 @@
 # bitmap を内包した TrueType Collection から bitmap を削除するスクリプト
 
-python 勉強用。まだ msgothic.ttc 専用。いろいろ決め打ち。未完成。
+python 勉強用。~~~まだ msgothic.ttc 専用。~~~汎用性向上で msgothic.ttc 以外の TTC でも自動的にファミリー名を取得するからおk。でも未完成。
 
 ## USAGE
 
@@ -12,7 +12,7 @@ python 勉強用。まだ msgothic.ttc 専用。いろいろ決め打ち。未�
 ### Step 1
 Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.
 ```
-$ bash removeBitmap.sh step1
+$ bash removeBitmap.sh step1 hoge.ttc
 ```
 ### Step 2
 Adjust hinting on Windows.
@@ -22,7 +22,7 @@ C:\hogehoge> ttfautohint.exe
 ### Step 3
 Merge TTFs to TTC.
 ```
-$ bash removeBitmap.sh step3
+$ bash removeBitmap.sh step3 hoge.ttc
 ```
 
 ## LICENSE
