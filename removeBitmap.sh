@@ -13,7 +13,7 @@ tmpUIa="tmp-msgUIa.ttf";
 #
 # Main routine
 #
-BASEPATH=$(cd $(dirname $0) && pwd);
+BASEPATH="$(cd "$(dirname "$0")" && pwd)";
 FONTNAME=$2;
 
 if [ $# -lt 2 ]; then
@@ -26,9 +26,9 @@ fi
 
 cd /tmp/;
 
-if [ $1 = "step1" ]
+if [ "$1" = "step1" ]
 then
-    if [ -f "${DRPBXDIR}/${tmpM}" -a -f "${DRPBXDIR}/${tmpP}" -a -f "${DRPBXDIR}/${tmpUI}" ]; then
+    if [ -f "${DRPBXDIR}/${tmpM}" ] && [ -f "${DRPBXDIR}/${tmpP}" ] && [ -f "${DRPBXDIR}/${tmpUI}" ]; then
         echo "";
         echo "Temporary file exists. Skip step.";
         echo "";
@@ -36,18 +36,18 @@ then
     fi
     
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
-        cp ${DRPBXDIR}/${FONTNAME} .;
+        cp "${DRPBXDIR}/${FONTNAME}" .;
         # fontforge -script ${BASEPATH}/BreakeTTC.pe;
-        python ${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpM} ${tmpP} ${tmpUI};
+        python "${BASEPATH}"/pyFFctrl.py "$1 ${FONTNAME} ${tmpM} ${tmpP} ${tmpUI}";
         
-        if [ -f "${tmpM}" -a -f "${tmpP}" -a -f "${tmpUI}" ]; then
+        if [ -f "${tmpM}" ] && [ -f "${tmpP}" ] && [ -f "${tmpUI}" ]; then
             # sh script for workaround fontforge bug. Thank you ricty team.
-            sh ${BASEPATH}/os2version_reviser.sh ${tmpM};
-            sh ${BASEPATH}/os2version_reviser.sh ${tmpP};
-            sh ${BASEPATH}/os2version_reviser.sh ${tmpUI};
+            sh "${BASEPATH}"/os2version_reviser.sh "${tmpM}";
+            sh "${BASEPATH}"/os2version_reviser.sh "${tmpP}";
+            sh "${BASEPATH}"/os2version_reviser.sh "${tmpUI}";
             
             # Move ttf files for step 2.
-            mv {${tmpM},${tmpP},${tmpUI}} ${DRPBXDIR}/;
+            mv {"${tmpM}","${tmpP}","${tmpUI}"} "${DRPBXDIR}"/;
             rm tmp-msg*.bak;
             
             echo "";
@@ -60,22 +60,22 @@ then
             echo "";
         fi
     fi
-elif [ $1 = "step2" ]
+elif [ "$1" = "step2" ]
 then
     echo "";
     echo "Please create ${tmpMa}, ${tmpPa}, ${tmpUIa} by ttfautohint.exe on Windows via Dropbox.";
     echo "";
     exit 0;
-elif [ $1 = "step3" ]
+elif [ "$1" = "step3" ]
 then
-    if [ -f "${DRPBXDIR}/${tmpMa}" -a -f "${DRPBXDIR}/${tmpPa}" -a -f "${DRPBXDIR}/${tmpUIa}" ]; then
-        cp ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}} .;
-        python ${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpMa} ${tmpPa} ${tmpUIa}; # merge by python
+    if [ -f "${DRPBXDIR}/${tmpMa}" ] && [ -f "${DRPBXDIR}/${tmpPa}" ] && [ -f "${DRPBXDIR}/${tmpUIa}" ]; then
+        cp "${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}}" .;
+        python "${BASEPATH}/pyFFctrl.py $1 ${FONTNAME} ${tmpMa} ${tmpPa} ${tmpUIa}"; # merge by python
         
         if [ -f "new_${FONTNAME}" ]; then
-            mv new_${FONTNAME} ${DRPBXDIR}/;
-            rm ${DRPBXDIR}/{${tmpMa},${tmpPa},${tmpUIa}};
-            rm {${tmpMa},${tmpPa},${tmpUIa}};
+            mv "new_${FONTNAME}" "${DRPBXDIR}"/;
+            rm "${DRPBXDIR}"/{"${tmpMa}","${tmpPa}","${tmpUIa}"};
+            rm {"${tmpMa}","${tmpPa}","${tmpUIa}"};
             
             echo "";
             echo "End of step 3.";
