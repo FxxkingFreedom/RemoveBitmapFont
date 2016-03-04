@@ -20,20 +20,24 @@ if argvs[1] == "step1":
     # Get TTC family names
     familyNames = fontforge.fontsInFile(argvs[2])
     # flags = ('opentype', 'TeX-table', 'round', 'dummy-dsig')
-    flags = ('opentype', 'round')
+    flags = ('opentype')
     
     # Breake TTC
     i = 0
     for familyName in familyNames:
         openName = "%s(%s)" % (argvs[2], familyName) # ex, "msgothic.ttc(MS UI Gothic)"
-        tmpTTF = "%s%d.ttf" % (argvs[3], i)
+        tmpTTF = "%s%da.ttf" % (argvs[3], i)
         print openName
         font = fontforge.open(openName)
-        font.encoding = 'UnicodeBMP'
+        # font.encoding = 'UnicodeBMP'
+        font.simplify()
+        font.round()
+        font.autoHint()
+        font.autoInstr()
         font.generate(tmpTTF, flags = flags)
         font.close()
         i += 1
-    
+        
 elif argvs[1] == "step3":
     # Generate TTC.
     newTTCname = 'new_' + argvs[2]

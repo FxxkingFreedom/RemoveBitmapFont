@@ -13,7 +13,7 @@
 # Open("msgothic.ttc(MS PGothic)");Generate("aaa-P.ttf");
 # Open("msgothic.ttc(MS UI Gothic)");Generate("aaa-UI.ttf");
 
-Open("meiryo.ttc(Meiryo)");Generate("rbf-tmp-ttf0.ttf");
-Open("meiryo.ttc(Meiryo Italic)");Generate("rbf-tmp-ttf1.ttf");
-Open("meiryo.ttc(Meiryo UI)");Generate("rbf-tmp-ttf2.ttf");
-Open("meiryo.ttc(Meiryo UI Italic)");Generate("rbf-tmp-ttf3.ttf");
+Open("meiryo.ttc(Meiryo)");Generate("rbf-tmp-ttf0.ttf");Close()
+#Open("meiryo.ttc(Meiryo Italic)");Generate("rbf-tmp-ttf1.ttf");Close()
+#Open("meiryo.ttc(Meiryo UI)");Generate("rbf-tmp-ttf2.ttf");Close()
+#Open("meiryo.ttc(Meiryo UI Italic)");Generate("rbf-tmp-ttf3.ttf");Close()

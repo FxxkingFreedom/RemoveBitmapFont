@@ -14,7 +14,7 @@ if not exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     takeown /F %WINDIR%\Fonts\msgothic.ttc /A
     icacls %WINDIR%\Fonts\msgothic.ttc /grant Administrators:F
     move %WINDIR%\Fonts\msgothic.ttc C:\temp\FontsBackup\Original
-    copy %HOMEPATH%\Dropbox\removeBitmap\newMSGothic.ttc C:\temp\tmpfileX
+    copy %HOMEPATH%\Dropbox\removeBitmap\new_msgothic.ttc C:\temp\tmpfileX
     move C:\temp\tmpfileX %WINDIR%\Fonts\msgothic.ttc
     echo ---
     echo Finished install.
