@@ -12,19 +12,25 @@ if argc == 1:
     print "ex, python %s step1 meiryo.ttc tmp-ttf" % argvs[0]
     quit()
 
+fontforge.setPrefs('CoverageFormatsAllowed', 1)
+
 if argvs[1] == "step1":
     # Get TTC family names
-    familyNames = fontforge.fontsInFile(argvs[2]);
+    familyNames = fontforge.fontsInFile(argvs[2])
+    # flags = ('opentype', 'TeX-table', 'round', 'dummy-dsig')
+    flags = ('opentype', 'round')
     
     # Breake TTC
-    i = 0;
+    i = 0
     for familyName in familyNames:
-        openName = "%s(%s)" % (argvs[2], familyName); # ex, "msgothic.ttc(MS UI Gothic)"
-        tmpTTF = "%s%d.ttf" % (argvs[3], i);
-        font = fontforge.open(openName);
-        font.generate(tmpTTF);
-        font.close();
-        i += 1;
+        openName = "%s(%s)" % (argvs[2], familyName) # ex, "msgothic.ttc(MS UI Gothic)"
+        tmpTTF = "%s%d.ttf" % (argvs[3], i)
+        print openName
+        font = fontforge.open(openName)
+        font.encoding = 'UnicodeBMP'
+        font.generate(tmpTTF, flags = flags)
+        font.close()
+        i += 1
     
 elif argvs[1] == "step3":
     # Generate TTC.

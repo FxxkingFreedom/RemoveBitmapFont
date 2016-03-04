@@ -1,8 +1,18 @@
 # bitmap を内包した TrueType Collection から bitmap を削除するスクリプト
 
-python 勉強用。~~~まだ msgothic.ttc 専用。~~~汎用性向上で msgothic.ttc 以外の TrueType Collection でも自動的にファミリー名を取得するからおk。でも未完成。
+python 勉強用。~~まだ msgothic.ttc 専用。~~汎用性向上で msgothic.ttc 以外の TrueType Collection でも自動的にファミリー名を取得するからおk。でも未完成。
 
-メイリオが一部文字化けしちゃうけど、msgothic.ttc と meiryo.ttc で分解・統合は動作しています。
+| フォント                     | 結果 | 備考               |
+|:-----------------------------|:----:|:-------------------|
+| msgothic.ttc(MS Gothic)      | OK   | 問題なし           |
+| msgothic.ttc(MS PGothic)     | OK   | 問題なし           |
+| msgothic.ttc(MS UI Gothic)   | OK   | サムネだけおかしい |
+| meiryo.ttc(Meiryo)           | NG   | 日本語だけ文字化け |
+| meiryo.ttc(Meiryo Italic)    | OK   | 問題なし           |
+| meiryo.ttc(Meiryo UI)        | OK   | 問題なし           |
+| meiryo.ttc(Meiryo UI Italic) | OK   | 問題なし           |
+
+meiryo はビットマップもってないから別にこのままでもいいかなって...
 
 ## USAGE
 
