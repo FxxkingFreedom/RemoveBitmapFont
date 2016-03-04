@@ -22,6 +22,7 @@ fi
 cd /tmp/;
 
 if [ "$1" = "step1" ]; then
+    # TODO: ちゃんとする
     if [ -f "${DRPBXDIR}/${tmpPrefix}0.ttf" ]; then
         echo "";
         echo "Temporary file exists. Skip step.";
@@ -31,12 +32,12 @@ if [ "$1" = "step1" ]; then
     
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
         cp "${DRPBXDIR}/${FONTNAME}" .;
-        # fontforge -script ${BASEPATH}/BreakeTTC.pe;
         python "${BASEPATH}"/pyFFctrl.py "$1" "${FONTNAME}" "$tmpPrefix";
         
         for tmpTTF in $(ls . | grep "$tmpPrefix") ; do
             if [ -f "$tmpTTF" ]; then
                 # sh script for workaround fontforge bug. Thank you ricty team.
+                # TODO: このスクリプトじゃなくて python で吸収する (via hoge.py)
                 sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" &&
                 mv "$tmpTTF" "${DRPBXDIR}"/;
                 rm ${tmpPrefix}*.ttf.bak;

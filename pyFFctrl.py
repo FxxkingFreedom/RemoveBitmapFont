@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, glob, fontforge;
+import sys
+import glob
+import fontforge
 
-argvs = sys.argv;
-argc = len(argvs);
+argvs = sys.argv
+argc = len(argvs)
 
 # TODO: use paramXXXX
 if argc == 1:
@@ -45,12 +47,12 @@ elif argvs[1] == "step3":
     if len(fontX) > 1:
         f = fontX[0]
         fontX.pop(0)
-        f.generateTtc(newTTCname, (fontX), ttcflags = ("merge",), layer = 1);
+        f.generateTtc(newTTCname, (fontX), ttcflags = ("merge",), layer = 1)
     else:
-        pass;
+        pass
     
     for font in fontX:
-        font.close();
+        font.close()
     
 else:
-    pass;
+    pass
