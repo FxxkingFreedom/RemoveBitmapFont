@@ -8,7 +8,7 @@ DRPBXDIR="${HOME}/Dropbox/removeBitmap";
 # Main routine
 #
 atExit() {
-    [[ -n ${utmpdir-} ]] && rm -f "$utmpdir"
+    [[ -n ${utmpdir-} ]] && rm -rf "$utmpdir"
 }
 
 trap atExit EXIT
@@ -29,7 +29,7 @@ cd "$utmpdir";
 
 if [ "$1" = "step1" ]; then
     # TODO: ちゃんとする
-    if [ -f "${DRPBXDIR}/${tmpPrefix}0.ttf" ]; then
+    if [ -f "${DRPBXDIR}/${tmpPrefix}0a.ttf" ]; then
         echo "Temporary file exists. Skip step.";
         exit 0;
     fi

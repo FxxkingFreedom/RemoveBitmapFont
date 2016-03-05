@@ -10,8 +10,8 @@ argc = len(argvs)
 
 # TODO: use paramXXXX
 if argc == 1:
-    print "Usage: python %s step{1|3} font-file-name prefix" % argvs[0]
-    print "ex, python %s step1 meiryo.ttc tmp-ttf" % argvs[0]
+    print "  Usage: python %s step{1|3} font-file-name prefix" % argvs[0]
+    print "    ex, python %s step1 meiryo.ttc tmp-ttf" % argvs[0]
     quit()
 
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
@@ -20,7 +20,7 @@ if argvs[1] == "step1":
     # Get TTC family names
     familyNames = fontforge.fontsInFile(argvs[2])
     # flags = ('opentype', 'TeX-table', 'round', 'dummy-dsig')
-    flags = ('opentype')
+    flags = ('opentype', 'round')
     
     # Breake TTC
     i = 0
@@ -29,7 +29,7 @@ if argvs[1] == "step1":
         tmpTTF = "%s%da.ttf" % (argvs[3], i)
         print openName
         font = fontforge.open(openName)
-        # font.encoding = 'UnicodeBMP'
+        font.encoding = 'UnicodeFull'
         font.simplify()
         font.round()
         font.autoHint()
@@ -37,13 +37,12 @@ if argvs[1] == "step1":
         font.generate(tmpTTF, flags = flags)
         font.close()
         i += 1
-        
 elif argvs[1] == "step3":
     # Generate TTC.
     newTTCname = 'new_' + argvs[2]
     files = glob.glob(argvs[3] + '[0-9]a.ttf')
-    
     fontX = []
+    
     for file in files:
         fontOpen = fontforge.open(file)
         fontX.append(fontOpen)
@@ -57,6 +56,5 @@ elif argvs[1] == "step3":
     
     for font in fontX:
         font.close()
-    
 else:
     pass
