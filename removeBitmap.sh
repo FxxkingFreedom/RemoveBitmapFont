@@ -7,6 +7,14 @@ DRPBXDIR="${HOME}/Dropbox/removeBitmap";
 #
 # Main routine
 #
+atExit() {
+    [[ -n ${utmpdir-} ]] && rm -f "$utmpdir"
+}
+
+trap atExit EXIT
+trap 'trap - EXIT; atExit; exit -1' INT PIPE TERM
+
+utmpdir=$(mktemp -d);
 tmpPrefix="rbf-tmp-ttf";
 BASEPATH="$(cd $(dirname $0) && pwd)";
 FONTNAME=$2;
@@ -17,7 +25,7 @@ if [ $# -lt 2 ]; then
     exit 1;
 fi
 
-cd /tmp/;
+cd "$utmpdir";
 
 if [ "$1" = "step1" ]; then
     # TODO: ちゃんとする
