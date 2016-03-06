@@ -42,7 +42,7 @@ if argvs[1] == "step1":
         
         # Edit font
         font.encoding = 'UnicodeFull'
-        font.selection.all()
+        # font.selection.all()
         font.simplify()
         font.round()
         font.autoHint()
