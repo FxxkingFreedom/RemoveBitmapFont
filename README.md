@@ -2,15 +2,15 @@
 
 python 勉強用。~~まだ msgothic.ttc 専用。~~汎用性向上で msgothic.ttc 以外の TrueType Collection でも自動的にファミリー名を取得するからおk。でも未完成。
 
-| フォント                     | 結果 | 備考               |
-|:-----------------------------|:----:|:-------------------|
-| msgothic.ttc(MS Gothic)      | OK   | 問題なし           |
-| msgothic.ttc(MS PGothic)     | OK   | 問題なし           |
-| msgothic.ttc(MS UI Gothic)   | OK   | サムネだけおかしい |
-| meiryo.ttc(Meiryo)           | NG   | 日本語だけ文字化け |
-| meiryo.ttc(Meiryo Italic)    | OK   | 問題なし           |
-| meiryo.ttc(Meiryo UI)        | OK   | 問題なし           |
-| meiryo.ttc(Meiryo UI Italic) | OK   | 問題なし           |
+| フォント                      | 結果 | 備考               |
+|:------------------------------|:----:|:-------------------|
+| msgothic.ttc (MS Gothic)      | OK   | 問題なし           |
+| msgothic.ttc (MS PGothic)     | OK   | 問題なし           |
+| msgothic.ttc (MS UI Gothic)   | OK   | サムネだけおかしい |
+| meiryo.ttc (Meiryo)           | NG   | 日本語だけ文字化け |
+| meiryo.ttc (Meiryo Italic)    | OK   | サムネだけおかしい |
+| meiryo.ttc (Meiryo UI)        | OK   | 問題なし           |
+| meiryo.ttc (Meiryo UI Italic) | OK   | 問題なし           |
 
 meiryo はビットマップもってないから別にこのままでもいいかなって...
 
@@ -26,8 +26,8 @@ Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.
 ```
 $ bash removeBitmap.sh step1 foo.ttc
 ```
-### Step 2
-Adjust hinting on Windows.
+### ~~Step 2~~
+~~Adjust hinting on Windows.~~
 ```
 C:\hogehoge> ttfautohint.exe
 ```
@@ -36,6 +36,7 @@ Merge TTFs to TTC.
 ```
 $ bash removeBitmap.sh step3 foo.ttc
 ```
+![result](./images/msgss.png)
 
 ## LICENSE
 
