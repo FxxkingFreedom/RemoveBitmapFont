@@ -45,6 +45,7 @@ MIT
 ## Note
 - InstallforWin7.bat and UninstallforWin7.bat work only msgothic.ttc.
 - EL Capitan beta 5 で動作確認済み。
+- EL Capitan beta 6 で動作確認済み。
 - しかし未完成なので、ソース読んで理解した人だけ実行してください。
 - hinting 調整も python でやりたいなあ...
 - mktemp の挙動が一緒になってた...知らなかった...
