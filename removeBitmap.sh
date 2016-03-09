@@ -39,6 +39,7 @@ if [ "${STEPSEQ}" = "step1" ]; then
     fi
     
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
+        echo "====> Starting step 1.";
         cp "${DRPBXDIR}/${FONTNAME}" .;
         python "${BASEPATH}"/pyFFctrl.py "${STEPSEQ}" "${FONTNAME}" "$tmpPrefix";
         
@@ -49,19 +50,21 @@ if [ "${STEPSEQ}" = "step1" ]; then
                 sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" &&
                 mv "$tmpTTF" "${DRPBXDIR}"/;
                 rm ${tmpPrefix}*.ttf.bak;
+                
+                echo "===> Finish step 1.";
+                exit 0;
             else
-                echo "===> $tmpTTF not found.";
+                echo "===> $tmpTTF not found. Break TTC fail?";
+                exit 1;
             fi
         done
-        
-        echo "===> End of step 1.";
-        exit 0;
     fi
 elif [ "${STEPSEQ}" = "step2" ]; then
     echo "===> Please ${tmpPrefix}0a.ttf, ${tmpPrefix}1a.ttf, ${tmpPrefix}2a.ttf and so on by ttfautohint.exe on Windows.";
     exit 0;
 elif [ "${STEPSEQ}" = "step3" ]; then
     if ls "${DRPBXDIR}" | grep "${tmpPrefix}[0-9]a.ttf" ; then
+        echo "====> Starting step 3.";
         cp "${DRPBXDIR}"/"${tmpPrefix}"*a.ttf .;
         python "${BASEPATH}"/pyFFctrl.py "${STEPSEQ}" "${FONTNAME}" "${tmpPrefix}"; # merge by python
         
@@ -72,7 +75,7 @@ elif [ "${STEPSEQ}" = "step3" ]; then
             rm "${DRPBXDIR}"/"$tmpPrefix"*a.ttf;
             rm "$tmpPrefix"*a.ttf;
             
-            echo "===> End of step 3.";
+            echo "===> Finish step 3.";
             exit 0;
         else
             echo "===> Merge TTC fail. Check ${BASEPATH}/pyFFctrl.py.";
