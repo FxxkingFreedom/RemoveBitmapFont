@@ -49,12 +49,12 @@ def main(argvs):
             
             # Edit font
             # font.encoding = 'UnicodeFull'
-            font.selection.all()
-            font.simplify()
-            font.round()
-            font.autoHint()
-            font.autoInstr()
-            font.gasp = ((65535, ('gridfit', 'antialias', 'symmetric-smoothing', 'gridfit+smoothing')),)
+            # font.selection.all()
+            # font.simplify()
+            # font.round()
+            # font.autoHint()
+            # font.autoInstr()
+            font.gasp = ((8, ('antialias',)),(23, ('antialias', 'symmetric-smoothing')),(65535, ('gridfit', 'antialias', 'symmetric-smoothing', 'gridfit+smoothing')),)
             font.gasp_version = 1
             
             # Generate font
