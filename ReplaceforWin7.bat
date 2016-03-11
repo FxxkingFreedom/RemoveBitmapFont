@@ -10,7 +10,6 @@ if exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     move %WINDIR%\Fonts\msgothic.ttc C:\temp\tmpfileX1
     copy %HOMEPATH%\Dropbox\removeBitmap\new_msgothic.ttc C:\temp\tmpfileX
     move C:\temp\tmpfileX %WINDIR%\Fonts\msgothic.ttc
-    del C:\temp\tmpfileX1
     echo ---
     echo Finished re-install font.
     echo ---

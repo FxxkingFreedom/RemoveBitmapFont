@@ -54,7 +54,7 @@ def main(argvs):
             # font.round()
             # font.autoHint()
             # font.autoInstr()
-            font.gasp = ((8, ('antialias',)),(23, ('antialias', 'symmetric-smoothing')),(65535, ('gridfit', 'antialias', 'symmetric-smoothing', 'gridfit+smoothing')),)
+            font.gasp = ((23, ('antialias', 'symmetric-smoothing')),(65535, ('gridfit', 'antialias', 'symmetric-smoothing', 'gridfit+smoothing')),)
             font.gasp_version = 1
             
             # Generate font
