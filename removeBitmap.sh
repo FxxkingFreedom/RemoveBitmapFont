@@ -23,6 +23,7 @@ FONTNAME=$2;
 
 # Move temporary directory.
 cd "$utmpdir";
+echo "$utmpdir";
 
 # Check argv
 if [ $# -lt 2 ]; then
@@ -43,6 +44,7 @@ if [ "${STEPSEQ}" = "step1" ]; then
         cp "${DRPBXDIR}/${FONTNAME}" .;
         python "${BASEPATH}"/pyFFctrl.py "${STEPSEQ}" "${FONTNAME}" "$tmpPrefix";
         
+        echo "====> Fix OS/2 version";
         for tmpTTF in $(ls . | grep "$tmpPrefix") ; do
             if [ -f "$tmpTTF" ]; then
                 # sh script for workaround fontforge bug. Thank you ricty team.
@@ -50,14 +52,13 @@ if [ "${STEPSEQ}" = "step1" ]; then
                 sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" &&
                 mv "$tmpTTF" "${DRPBXDIR}"/;
                 rm ${tmpPrefix}*.ttf.bak;
-                
-                echo "===> Finish step 1.";
-                exit 0;
             else
                 echo "===> $tmpTTF not found. Break TTC fail?";
                 exit 1;
             fi
         done
+        echo "===> Finish step 1.";
+        exit 0;
     fi
 elif [ "${STEPSEQ}" = "step2" ]; then
     echo "===> Please ${tmpPrefix}0a.ttf, ${tmpPrefix}1a.ttf, ${tmpPrefix}2a.ttf and so on by ttfautohint.exe on Windows.";

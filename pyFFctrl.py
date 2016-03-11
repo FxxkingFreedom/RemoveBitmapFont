@@ -49,11 +49,11 @@ def main(argvs):
             
             # Edit font
             # font.encoding = 'UnicodeFull'
-            # font.selection.all()
-            # font.simplify()
-            # font.round()
-            # font.autoHint()
-            # font.autoInstr()
+            font.selection.all()
+            font.simplify()
+            font.round()
+            font.autoHint()
+            font.autoInstr()
             font.gasp = ((65535, ('gridfit', 'antialias', 'symmetric-smoothing', 'gridfit+smoothing')),)
             font.gasp_version = 1
             
