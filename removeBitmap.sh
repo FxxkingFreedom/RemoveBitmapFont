@@ -36,20 +36,21 @@ if [ "${STEPSEQ}" = "step1" ]; then
     # TODO: ちゃんとする
     if [ -f "${DRPBXDIR}/${tmpPrefix}0a.ttf" ]; then
         echo "==> Temporary file exists. Skip step.";
-        # exit 0;
+        exit 0;
     fi
     
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
         echo "==> Starting step 1.";
         cp "${DRPBXDIR}/${FONTNAME}" .;
-        python "${BASEPATH}"/pyFFctrl.py "${STEPSEQ}" "${FONTNAME}" "$tmpPrefix";
+        python "${BASEPATH}"/pyFFctrl.py "step1" "${FONTNAME}" "$tmpPrefix";
         
         echo "==> Start fix OS/2 version";
         for tmpTTF in $(ls . | grep "$tmpPrefix") ; do
             if [ -f "$tmpTTF" ]; then
                 # sh script for workaround fontforge bug. Thank you ricty team.
                 # TODO: このスクリプトじゃなくて python で吸収する (via hoge.py)
-                sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" && mv "$tmpTTF" "${DRPBXDIR}"/;
+                # sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF" && mv "$tmpTTF" "${DRPBXDIR}"/;
+                sh "$BASEPATH"/os2version_reviser.sh "$tmpTTF"; ### test1
                 rm ${tmpPrefix}*.ttf.bak;
                 # mv "$tmpTTF" "${DRPBXDIR}"/;
             else
@@ -58,6 +59,28 @@ if [ "${STEPSEQ}" = "step1" ]; then
             fi
         done
         echo "==> Finish step 1.";
+        ### start test1
+        if ls "${utmpdir}" | grep "${tmpPrefix}[0-9]a.ttf" ; then
+            echo "==> Starting step 3.";
+            python "${BASEPATH}"/pyFFctrl.py "step3" "${FONTNAME}" "${tmpPrefix}"; # merge by python
+            
+            if [ -f "new_${FONTNAME}" ]; then
+                mv "new_${FONTNAME}" "${DRPBXDIR}"/;
+                
+                # remove temporary TTFs.
+                rm "$tmpPrefix"*a.ttf;
+                
+                echo "==> Finish step 3.";
+                exit 0;
+            else
+                echo "==> Merge TTC fail. Check ${BASEPATH}/pyFFctrl.py.";
+                exit 1;
+            fi
+        else
+            echo "==> *a.ttf not found.";
+            exit 0;
+        fi
+        ### end test1
         exit 0;
     fi
 elif [ "${STEPSEQ}" = "step2" ]; then
