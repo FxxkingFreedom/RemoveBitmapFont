@@ -7,9 +7,10 @@ pause
 if exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     takeown /F %WINDIR%\Fonts\msgothic.ttc /A
     icacls %WINDIR%\Fonts\msgothic.ttc /grant Administrators:F
-    move %WINDIR%\Fonts\msgothic.ttc C:\temp\tmpfileX
+    move %WINDIR%\Fonts\msgothic.ttc C:\temp\tmpfileX1
     copy %HOMEPATH%\Dropbox\removeBitmap\new_msgothic.ttc C:\temp\tmpfileX
     move C:\temp\tmpfileX %WINDIR%\Fonts\msgothic.ttc
+    del C:\temp\tmpfileX1
     echo ---
     echo Finished re-install font.
     echo ---
