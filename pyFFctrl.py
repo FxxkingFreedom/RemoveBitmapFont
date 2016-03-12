@@ -15,6 +15,17 @@ import fontforge
 
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
 
+# – antialias: Hints are not applied, use grayscale smoothing.
+# – gridfit: Use hints.
+# – gridfit+smoothing: ClearType GridFitting.
+# – symmetric-smoothing: ClearType Antialiasing.
+def gasp():
+    return (
+        (8,     ('symmetric-smoothing') ),
+        (23,    ('antialias', 'symmetric-smoothing') ),
+        (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
+    )
+
 def main(argvs):
     argc = len(argvs)
     
@@ -54,7 +65,7 @@ def main(argvs):
             # font.round()
             # font.autoHint()
             # font.autoInstr()
-            font.gasp = ((23, ('antialias', 'symmetric-smoothing')),(65535, ('gridfit', 'antialias', 'symmetric-smoothing', 'gridfit+smoothing')),)
+            font.gasp = gasp()
             font.gasp_version = 1
             
             # Generate font
