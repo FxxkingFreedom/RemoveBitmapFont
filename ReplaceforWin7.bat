@@ -12,14 +12,11 @@ if exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     move C:\temp\tmpfileX %WINDIR%\Fonts\msgothic.ttc
     echo ---
     echo Finished re-install font.
+    
     echo ---
+    echo Result
+    dir %WINDIR%\Fonts\ms*
+    
     pause
+    reboot
 )
-
-echo ---
-echo Result
-dir %WINDIR%\Fonts\ms*
-
-echo ---
-pause
-REM reboot

@@ -21,9 +21,11 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 # – symmetric-smoothing: ClearType Antialiasing.
 def gasp():
     return (
-        (8,     ('symmetric-smoothing') ),
-        (23,    ('antialias', 'symmetric-smoothing') ),
-        (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
+        # (8,     ('antialias') ),
+        # (23,    ('antialias', 'symmetric-smoothing') ),
+        # (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
+        # (23,    () ),
+        (65535, ('antialias') ),
     )
 
 def main(argvs):
@@ -43,7 +45,7 @@ def main(argvs):
         # Get packed family names
         familyNames = fontforge.fontsInFile(fontFSName)
         # flags = ('opentype', 'TeX-table', 'round', 'dummy-dsig')
-        flags = ('opentype')
+        flags = ('opentype', 'round', 'dummy-dsig')
         
         # Breake TTC
         i = 0
@@ -60,7 +62,8 @@ def main(argvs):
             
             # Edit font
             # font.encoding = 'UnicodeFull'
-            # font.selection.all()
+            font.selection.all()
+            # font.em = 1024
             # font.simplify()
             # font.round()
             # font.autoHint()

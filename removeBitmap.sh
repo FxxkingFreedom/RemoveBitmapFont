@@ -23,7 +23,7 @@ FONTNAME=$2;
 
 # Move temporary directory.
 cd "$utmpdir";
-echo "$utmpdir";
+echo "==> Your tmporary directory is $utmpdir.";
 
 # Check argv
 if [ $# -lt 2 ]; then
@@ -34,10 +34,10 @@ fi
 
 if [ "${STEPSEQ}" = "step1" ]; then
     # TODO: ちゃんとする
-    if [ -f "${DRPBXDIR}/${tmpPrefix}0a.ttf" ]; then
-        echo "==> Temporary file exists. Skip step.";
-        exit 0;
-    fi
+    # if [ -f "${DRPBXDIR}/${tmpPrefix}0a.ttf" ]; then
+    #     echo "==> Temporary file exists. Skip step.";
+    #     exit 0;
+    # fi
     
     if [ -f "${DRPBXDIR}/${FONTNAME}" ]; then
         echo "==> Starting step 1.";
