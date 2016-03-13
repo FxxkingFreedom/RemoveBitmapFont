@@ -25,7 +25,7 @@ def gasp():
         # (23,    ('antialias', 'symmetric-smoothing') ),
         # (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
         # (23,    () ),
-        (65535, ('antialias') ),
+        (65535, ('antialias', 'symmetric-smoothing') ),
     )
 
 def main(argvs):
