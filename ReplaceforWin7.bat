@@ -18,5 +18,5 @@ if exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     dir %WINDIR%\Fonts\ms*
     
     pause
-    reboot
+    shutdown -r -t 0
 )
