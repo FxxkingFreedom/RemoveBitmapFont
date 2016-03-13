@@ -21,11 +21,9 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 # – symmetric-smoothing: ClearType Antialiasing.
 def gasp():
     return (
-        # (8,     ('antialias') ),
-        # (23,    ('antialias', 'symmetric-smoothing') ),
-        # (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
-        # (23,    () ),
-        (65535, ('antialias', 'symmetric-smoothing') ),
+        (8,     ('antialias') ),
+        (23,    ('antialias', 'symmetric-smoothing') ),
+        (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
     )
 
 def main(argvs):
@@ -52,22 +50,23 @@ def main(argvs):
         for familyName in familyNames:
             # openName: "msgothic.ttc(MS UI Gothic)"
             openName = "%s(%s)" % (fontFSName, familyName)
-            print "======> openName: %s" % openName
+            
             # tmp file name: rbf-tmp-ttf0a.ttf and rbf-tmp-ttf1a.ttf and so on.
             tmpTTF = "%s%da.ttf" % (tmpPrefix, i)
-            print "======> tmpTTF: %s" % tmpTTF
             
             # Open font
             font = fontforge.open(openName)
             
+            for glyph in font.selection.byGlyphs:
+                glyph.manualHints = True
+            
             # Edit font
-            # font.encoding = 'UnicodeFull'
+            font.encoding = 'UnicodeFull'
             font.selection.all()
-            # font.em = 1024
-            # font.simplify()
-            # font.round()
+            font.simplify()
+            font.round()
             # font.autoHint()
-            # font.autoInstr()
+            font.autoInstr()
             font.gasp = gasp()
             font.gasp_version = 1
             
