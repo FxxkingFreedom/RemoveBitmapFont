@@ -62,11 +62,11 @@ def main(argvs):
             
             # Edit font
             font.encoding = 'UnicodeFull'
-            font.selection.all()
-            font.simplify()
-            font.round()
+            # font.selection.all()
+            # font.simplify()
+            # font.round()
             # font.autoHint()
-            font.autoInstr()
+            # font.autoInstr()
             font.gasp = gasp()
             font.gasp_version = 1
             
