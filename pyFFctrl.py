@@ -14,6 +14,11 @@ import glob
 import fontforge
 
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
+fontforge.setPrefs("AutoHint", False)
+
+# TTF flags
+# flags = ('opentype', 'TeX-table', 'round', 'dummy-dsig')
+flags = ('opentype', 'old-kern', 'dummy-dsig', 'round', 'no-hints', 'PfEd-colors', 'PfEd-lookups', 'PfEd-guidelines', 'PfEd-background')
 
 # – antialias: Hints are not applied, use grayscale smoothing.
 # – gridfit: Use hints.
@@ -21,9 +26,9 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 # – symmetric-smoothing: ClearType Antialiasing.
 def gasp():
     return (
-        (8,     ('antialias') ),
-        (23,    ('antialias', 'symmetric-smoothing') ),
-        (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing') ),
+        (8,     ('antialias',)),
+        (16,    ('antialias', 'symmetric-smoothing')),
+        (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing')),
     )
 
 def main(argvs):
@@ -42,8 +47,6 @@ def main(argvs):
     if stepSeq == "step1":
         # Get packed family names
         familyNames = fontforge.fontsInFile(fontFSName)
-        # flags = ('opentype', 'TeX-table', 'round', 'dummy-dsig')
-        flags = ('opentype', 'round', 'dummy-dsig')
         
         # Breake TTC
         i = 0
@@ -57,11 +60,14 @@ def main(argvs):
             # Open font
             font = fontforge.open(openName)
             
-            for glyph in font.selection.byGlyphs:
+            # for glyph in font.selection.byGlyphs:
+            #     glyph.manualHints = True
+            
+            for glyph in fontforge.activeFont().selection.byGlyphs.__iter__():
                 glyph.manualHints = True
             
             # Edit font
-            font.encoding = 'UnicodeFull'
+            # font.encoding = 'UnicodeFull'
             # font.selection.all()
             # font.simplify()
             # font.round()
@@ -71,7 +77,7 @@ def main(argvs):
             font.gasp_version = 1
             
             # Generate font
-            font.generate(tmpTTF, flags = flags)
+            font.generate(tmpTTF, flags=flags)
             font.close()
             i += 1
         print "======> Breake TTC."
@@ -89,7 +95,7 @@ def main(argvs):
         if len(fontX) > 1:
             f = fontX[0]
             fontX.pop(0)
-            f.generateTtc(newTTCname, (fontX), ttcflags = ("merge",), layer = 1)
+            f.generateTtc(newTTCname, (fontX), ttcflags=("merge",), layer=1)
         else:
             print "======> Fonts not found. Or it is not enough fonts."
             quit()
