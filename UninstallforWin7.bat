@@ -13,14 +13,9 @@ if exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     move C:\temp\FontsBackup\Original\msgothic.ttc %WINDIR%\Fonts\msgothic.ttc
     echo ---
     echo Finished uninstall.
-    echo Please reboot Windows.
     echo ---
+    echo Result
+    dir %WINDIR%\Fonts\ms*
     pause
+    shutdown -r -t 0
 )
-
-echo ---
-echo Result
-dir %WINDIR%\Fonts\ms*
-
-echo ---
-pause

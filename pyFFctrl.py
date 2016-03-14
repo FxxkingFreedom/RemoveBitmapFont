@@ -60,11 +60,13 @@ def main(argvs):
             # Open font
             font = fontforge.open(openName)
             
-            # for glyph in font.selection.byGlyphs:
-            #     glyph.manualHints = True
+            for glyph in font.selection.byGlyphs.__iter__():
+                glyph.manualHints()
+                glyph.simplify()
+                glyph.round()
             
-            for glyph in fontforge.activeFont().selection.byGlyphs.__iter__():
-                glyph.manualHints = True
+            # for glyph in fontforge.activeFont().selection.byGlyphs.__iter__():
+            #     glyph.manualHints = True
             
             # Edit font
             # font.encoding = 'UnicodeFull'

@@ -19,7 +19,10 @@ if not exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     echo ---
     echo Finished install.
     echo ---
+    echo Result
+    dir %WINDIR%\Fonts\ms*
     pause
+    shutdown -r -t 0
 ) else (
     echo ---
     echo New msgothic.ttc already installed.
@@ -27,11 +30,3 @@ if not exist "C:\temp\FontsBackup\Original\msgothic.ttc" (
     echo ---
     pause
 )
-
-echo ---
-echo Result
-dir %WINDIR%\Fonts\ms*
-
-echo ---
-pause
-REM reboot
