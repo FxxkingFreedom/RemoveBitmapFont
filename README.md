@@ -6,7 +6,7 @@ python 勉強用。~~まだ msgothic.ttc 専用。~~汎用性向上で msgothic.
 |:------------------------------|:----:|:-------------------|
 | msgothic.ttc (MS Gothic)      | OK   | 問題なし           |
 | msgothic.ttc (MS PGothic)     | OK   | 問題なし           |
-| msgothic.ttc (MS UI Gothic)   | OK   | サムネだけおかしい |
+| msgothic.ttc (MS UI Gothic)   | OK   | 問題なし           |
 | meiryo.ttc (Meiryo)           | NG   | 日本語だけ文字化け |
 | meiryo.ttc (Meiryo Italic)    | OK   | サムネだけおかしい |
 | meiryo.ttc (Meiryo UI)        | OK   | 問題なし           |

@@ -61,7 +61,8 @@ def main(argvs):
             font = fontforge.open(openName)
             
             for glyph in font.selection.byGlyphs.__iter__():
-                glyph.manualHints()
+                glyph.manualHints = True
+                # glyph.manualHints()
                 glyph.simplify()
                 glyph.round()
             
