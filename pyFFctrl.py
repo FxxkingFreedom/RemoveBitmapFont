@@ -26,8 +26,8 @@ flags = ('opentype', 'old-kern', 'dummy-dsig', 'round', 'no-hints', 'PfEd-colors
 # – symmetric-smoothing: ClearType Antialiasing.
 def gasp():
     return (
-        (8,     ('antialias',)),
-        (16,    ('antialias', 'symmetric-smoothing')),
+        # (8,     ('antialias',)),
+        # (16,    ('antialias', 'symmetric-smoothing')),
         (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing')),
     )
 
