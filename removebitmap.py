@@ -17,7 +17,6 @@ import shutil
 import subprocess
 
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
-# fontforge.setPrefs("AutoHint", False)
 
 # TTF flags
 flags = ('opentype', 'round')
@@ -65,21 +64,8 @@ def main(argvs):
             # Open font
             font = fontforge.open(openName)
             
-            # for glyph in font.selection.byGlyphs.__iter__():
-            # for glyph in font.selection.byGlyphs:
-            #     glyph.manualHints = True
-            #     glyph.manualHints()
-            #     glyph.simplify()
-            #     glyph.round()
-            
             # Edit font
             font.encoding = 'UnicodeFull'
-            # font.selection.all()
-            # font.simplify()
-            # font.round()
-            # font.autoHint()
-            # font.autoInstr()
-            # font.cidFlatten()
             font.gasp = gasp()
             font.gasp_version = 1
             
