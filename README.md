@@ -22,7 +22,12 @@ meiryo はビットマップもってないから別にこのままでもいい�
 - Copy your foo.ttc to that 'removeBitmap' directory.
 
 ### Step 1
-Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.
+```
+python removebitmap.py msgothic.ttc rbf-tmp
+```
+
+### ~~Step 1~~
+~~Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.~~
 ```
 $ bash removeBitmap.sh step1 foo.ttc
 ```
@@ -31,8 +36,8 @@ $ bash removeBitmap.sh step1 foo.ttc
 ```
 C:\hogehoge> ttfautohint.exe
 ```
-### Step 3
-Merge TTFs to TTC.
+### ~~Step 3~~
+~~Merge TTFs to TTC.~~
 ```
 $ bash removeBitmap.sh step3 foo.ttc
 ```
