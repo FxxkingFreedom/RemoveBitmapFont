@@ -7,6 +7,7 @@
 # argv[2] ... temporary file prefix
 #
 # eg. python pyFFctrl.py step1 meiryo.ttc rbf-tmp-ttf
+#
 
 import sys
 import glob
