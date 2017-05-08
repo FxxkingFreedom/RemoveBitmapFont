@@ -5,12 +5,14 @@ echo Please quit all software.
 echo ---
 pause
 
-set /p fontSelect="1: msgothic.ttc / 2: meiryo.ttc? [1/2] "
+set /p fontSelect="1: msgothic / 2: meiryo / 3: meiryob ? [1/2/3] "
 
 if "%fontSelect%"=="1" (
     set oldFont=msgothic.ttc
 ) else if "%fontSelect%"=="2" (
     set oldFont=meiryo.ttc
+) else if "%fontSelect%"=="3" (
+    set oldFont=meiryob.ttc
 )
 
 if exist "C:\temp\FontsBackup\Original\%oldFont%" (
@@ -25,5 +27,5 @@ if exist "C:\temp\FontsBackup\Original\%oldFont%" (
     echo Result
     dir %WINDIR%\Fonts\%oldFont%
     pause
-    shutdown -r -t 5
+    REM shutdown -r -t 5
 )

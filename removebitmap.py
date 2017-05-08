@@ -71,12 +71,11 @@ def main(argvs):
             font.gasp = gasp()
             font.gasp_version = 1
             font.os2_vendor = "maud"
-            font.os2_version = 1
+            font.os2_version = 1 # Windows で幅広問題を回避する。
             
             # Generate font
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
-            #subprocess.call('bash os2version_reviser.sh ' + tempDir + "/" + tmpTTF, shell=True)
             i += 1
         print "==> Finish breaking TTC."
         
