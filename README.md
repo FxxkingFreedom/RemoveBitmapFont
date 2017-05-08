@@ -1,6 +1,10 @@
-# bitmap を内包した TrueType Collection から bitmap を削除するスクリプト
+# MS の TTC の gasp テーブルとビットマップ部分を削除するスクリプト
 
-python 勉強用。~~まだ msgothic.ttc 専用。~~汎用性向上で msgothic.ttc 以外の TrueType Collection でも自動的にファミリー名を取得するからおk。でも未完成。
+Windows 10 Creators Update で ClearType が縦方向に AA するようになったということで、gasp の要らない部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。MS から日本語が無視されて約二十年、長かった...
+
+下記スクショは、msgothic, meiryo, yugothic[BLMR] の gasp をいじってどのサイズでもスムージングのみするようにしたものです。映ってる大部分が源真じゃあないかってのはありますが、分かる人が見れば分かるからってことで許してください。hook 系アプリが要らないというのはいい感じです。
+
+![result](./images/msgss.png)
 
 | フォント                      | 結果 | 備考               |
 |:------------------------------|:----:|:-------------------|
@@ -12,49 +16,34 @@ python 勉強用。~~まだ msgothic.ttc 専用。~~汎用性向上で msgothic.
 | meiryo.ttc (Meiryo UI)        | OK   | 問題なし           |
 | meiryo.ttc (Meiryo UI Italic) | OK   | 問題なし           |
 
-meiryo はビットマップもってないから別にこのままでもいいかなって...
-
-追記
-
-Windows 10 Creators Update で ClearType が縦方向にも AA するようになったということで、このスクリプトで簡単に Win10CU に合った msgothic ができます。
 
 ## USAGE
 
 ### Step 0
-- Install dropbox, fontforge into Mac or Unix like.
-- Make 'removeBitmap' directory in Dropbox. (ex: $HOME/Dropbox/removeBitmap/)
-- Copy your foo.ttc to that 'removeBitmap' directory.
+- Install fontforge.
+- Copy your ttc font to working directory.
 
 ### Step 1
 ```
 python removebitmap.py msgothic.ttc rbf-tmp
 ```
 
-### ~~Step 1~~
-~~Breake TrueType Collection to TTFs. And fix OS/2 version bug of fontforge.~~
+### Step 2
 ```
-$ bash removeBitmap.sh step1 foo.ttc
+Exec rmDefaultFonts.bat as administrator.
 ```
-### ~~Step 2~~
-~~Adjust hinting on Windows.~~
+
+### Step 3
 ```
-C:\hogehoge> ttfautohint.exe
+double-click new ttc font and click install button.
 ```
-### ~~Step 3~~
-~~Merge TTFs to TTC.~~
-```
-$ bash removeBitmap.sh step3 foo.ttc
-```
-![result](./images/msgss.png)
+
 
 ## LICENSE
 
 MIT
 
+
 ## Note
-- InstallforWin7.bat and UninstallforWin7.bat work only msgothic.ttc.
-- EL Capitan beta 5 で動作確認済み。
-- EL Capitan beta 6 で動作確認済み。
-- しかし未完成なので、ソース読んで理解した人だけ実行してください。
-- hinting 調整も python でやりたいなあ...
-- mktemp の挙動が一緒になってた...知らなかった...
+
+標準 AA だと薄いし、アプリ側が対応してないと白黒二値化でビットマップよりひどい有様になるので、ClearType が縦に AA したのは大きいです。ただ、未だにフォントレンダリングの処理はアプリ開発者の選択に任せてるので、例えば OneNote と Edge を比べても同じ DW なアプリなのに見た目がちぐはぐです。
