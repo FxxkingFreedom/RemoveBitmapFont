@@ -23,12 +23,12 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 flags = ('opentype', 'round')
 
 # – antialias: Hints are not applied, use grayscale smoothing.
-# – gridfit: Use hints.
+# – gridfit: Use hinting in Windows.
 # – gridfit+smoothing: ClearType GridFitting.
 # – symmetric-smoothing: ClearType Antialiasing.
 def gasp():
     return (
-        (65535, ('antialias', 'gridfit', 'symmetric-smoothing', 'gridfit+smoothing')),
+        (65535, ('antialias', 'symmetric-smoothing', 'gridfit+smoothing')),
     )
 
 def main(argvs):
@@ -47,17 +47,18 @@ def main(argvs):
     print tempDir
     
     # font file exist
-    if os.path.exists(homeDir + "/Dropbox/removeBitmap/" + fontFSName):
+    if os.path.exists(homeDir + "/Downloads/fonts/" + fontFSName):
         print "==> Start breaking TTC."
         
         # Get packed family names
-        familyNames = fontforge.fontsInFile(homeDir + "/Dropbox/removeBitmap/" + fontFSName)
+        familyNames = fontforge.fontsInFile(homeDir + "/Downloads/fonts/" + fontFSName)
         
         # Breake TTC
         i = 0
         for familyName in familyNames:
             # openName: "msgothic.ttc(MS UI Gothic)"
-            openName = "%s(%s)" % (homeDir + "/Dropbox/removeBitmap/" + fontFSName, familyName)
+            print "==> %s" % familyName
+            openName = "%s(%s)" % (homeDir + "/Downloads/fonts/" + fontFSName, familyName)
             
             # tmp file name: rbf-tmp-ttf0a.ttf and rbf-tmp-ttf1a.ttf and so on.
             tmpTTF = "%s%da.ttf" % (tmpPrefix, i)
@@ -69,11 +70,13 @@ def main(argvs):
             font.encoding = 'UnicodeFull'
             font.gasp = gasp()
             font.gasp_version = 1
+            font.os2_vendor = "maud"
+            font.os2_version = 1
             
             # Generate font
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
-            subprocess.call('bash os2version_reviser.sh ' + tempDir + "/" + tmpTTF, shell=True)
+            #subprocess.call('bash os2version_reviser.sh ' + tempDir + "/" + tmpTTF, shell=True)
             i += 1
         print "==> Finish breaking TTC."
         
@@ -93,7 +96,7 @@ def main(argvs):
             f.generateTtc(tempDir + "/" + newTTCname, (fontX), ttcflags=("merge",), layer=1)
             
             if os.path.exists(tempDir + "/" + newTTCname):
-                os.rename(tempDir + "/" + newTTCname, homeDir + "/Dropbox/removeBitmap/" + newTTCname)
+                os.rename(tempDir + "/" + newTTCname, homeDir + "/Downloads/fonts/" + newTTCname)
             else:
                 print "==> new TTC not found."
                 quit()
