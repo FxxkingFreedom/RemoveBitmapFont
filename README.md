@@ -14,6 +14,10 @@ python 勉強用。~~まだ msgothic.ttc 専用。~~汎用性向上で msgothic.
 
 meiryo はビットマップもってないから別にこのままでもいいかなって...
 
+追記
+
+Windows 10 Creators Update で ClearType が縦方向にも AA するようになったということで、このスクリプトで簡単に Win10CU に合った msgothic ができます。
+
 ## USAGE
 
 ### Step 0
