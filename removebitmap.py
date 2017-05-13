@@ -22,13 +22,16 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 # TTF flags
 flags = ('opentype', 'round')
 
-# – antialias: Hints are not applied, use grayscale smoothing.
-# – gridfit: Use hinting in Windows.
-# – gridfit+smoothing: ClearType GridFitting.
-# – symmetric-smoothing: ClearType Antialiasing.
+# antialias: Hints are not applied, use grayscale smoothing.
+# gridfit: Use hinting in Windows.
+# gridfit+smoothing: ClearType GridFitting.
+# symmetric-smoothing: ClearType Antialiasing.
+#
+# gridfit is hinting on Windows. So gridfit is unnecessary for me.
+#
 def gasp():
     return (
-        (65535, ('antialias', 'symmetric-smoothing', 'gridfit+smoothing')),
+        (65535, ('antialias', 'symmetric-smoothing')),
     )
 
 def main(argvs):
@@ -77,7 +80,6 @@ def main(argvs):
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
             i += 1
-
         print "==> Finish breaking TTC."
 
         print "==> Starting generate TTC."
