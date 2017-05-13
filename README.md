@@ -1,4 +1,4 @@
-# MS の TTC の gasp テーブルとビットマップ部分を削除するスクリプト
+# MS の TTC の gasp テーブルを編集し、ビットマップ部分を削除するスクリプト
 
 Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するようになったということで、gasp の要らない部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。MS から日本語が無視されて約二十年、長かった...
 
@@ -49,6 +49,11 @@ Reboot Windows.
 
 
 Enjoy!
+
+
+## Changelog
+
+ricty 生成スクリプト群の shell スクリプトを使わなくても「Windows で幅広問題」を回避するようにしました。
 
 
 ## LICENSE

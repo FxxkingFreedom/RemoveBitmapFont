@@ -56,7 +56,7 @@ def main(argvs):
         # Get packed family names
         familyNames = fontforge.fontsInFile(homeDir + "/Downloads/fonts/" + fontFSName)
 
-        # Breake TTC
+        # Breake TTC. TTC => TTF.
         i = 0
         for familyName in familyNames:
             # openName: "msgothic.ttc(MS UI Gothic)"
