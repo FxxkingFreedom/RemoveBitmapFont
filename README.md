@@ -1,20 +1,24 @@
-# MS の TTC の gasp テーブルを編集し、ビットマップ部分を削除するスクリプト
+# These are scripts that edit GASP table and remove bitmap part in Microsoft TrueType Collection font.
 
-Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するようになったということで、gasp の要らない部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。MS から日本語が無視されて約二十年、長かった...
+Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するようになったということで、GASP の要らない部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。MS から日本語が無視されて約二十年、長かった...
 
-下記スクショは、msgothic, meiryo[b], YuGothic[BLMR] の gasp を編集し、どのフォントサイズでもスムージング***のみ***するようにしたものです。映ってる大部分が源真じゃあないかってのはありますが、分かる人が見れば分かるからってことで許してください。hook 系アプリが要らないというのはいい感じです。
+ClearType do vertical Anti-Alias on Windows 10 Creators Update. Well, some fonts become beautiful when you only edit or remove unnecessary information, for example, GASP and EDBD table. It pasts about 20 years since MS ignore Japanese. It is long long time very much.
+
+下記スクショは、msgothic, meiryo[b], YuGothic[BLMR] の GASP を編集し、どのフォントサイズでもスムージングのみするようにしたものです。映ってる大部分が源真じゃあないかってのはありますが、分かる人が見れば分かるからってことで許してください。hook 系アプリが要らないというのはいい感じです。
+
+In a following screen shot, Windows font rendering is only smoothing any font size by editing GASP table of msgothic, meiryo[b], YuGothic[BLMR]. Never hinting.
 
 ![result](./images/msgss.png)
 
-| フォント                      | 結果 | 備考               |
-|:------------------------------|:----:|:-------------------|
-| msgothic.ttc (MS Gothic)      | OK   | 問題なし           |
-| msgothic.ttc (MS PGothic)     | OK   | 問題なし           |
-| msgothic.ttc (MS UI Gothic)   | OK   | 問題なし           |
-| meiryo.ttc (Meiryo)           | NG   | 日本語だけ文字化け |
-| meiryo.ttc (Meiryo Italic)    | OK   | サムネだけおかしい |
-| meiryo.ttc (Meiryo UI)        | OK   | 問題なし           |
-| meiryo.ttc (Meiryo UI Italic) | OK   | 問題なし           |
+| フォント                      | 結果 | 備考        |
+|:------------------------------|:----:|:------------|
+| msgothic.ttc (MS Gothic)      | OK   | No problem. |
+| msgothic.ttc (MS PGothic)     | OK   | No problem. |
+| msgothic.ttc (MS UI Gothic)   | OK   | No problem. |
+| meiryo.ttc (Meiryo)           | OK   | No problem. |
+| meiryo.ttc (Meiryo Italic)    | OK   | No problem. |
+| meiryo.ttc (Meiryo UI)        | OK   | No problem. |
+| meiryo.ttc (Meiryo UI Italic) | OK   | No problem. |
 
 
 ## USAGE
@@ -23,19 +27,20 @@ Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するよう
 
 - Install fontforge and python-fontforge.
 - Copy your msgothic.ttc font to working directory.
+- mkdir -p ~/Downloads/fonts
 
 
 ### Step 1
 
 ```
-python removebitmap.py msgothic.ttc rbf-tmp
+python removebitmap.py msgothic.ttc
 ```
 
 
 ### Step 2
 
 ```
-Move new font to Windows.
+Move new font in ~/Downloads/fonts/ to Windows.
 Exec rmDefaultFonts.bat as administrator.
 ```
 
@@ -43,7 +48,7 @@ Exec rmDefaultFonts.bat as administrator.
 ### Step 3
 
 ```
-double-click new msgothic.ttc and click 'Install' button.
+Double-click new msgothic.ttc and click 'Install' button.
 Reboot Windows.
 ```
 
@@ -53,7 +58,8 @@ Enjoy!
 
 ## Changelog
 
-ricty 生成スクリプト群の shell スクリプトを使わなくても「Windows で幅広問題」を回避するようにしました。
+- decrease argc.
+- ricty 生成スクリプト群の shell スクリプトを使わなくても「Windows で幅広問題」を回避するようにしました。(ricty 同梱のスクリプトを meiryo に使うと文字化けします)
 
 
 ## LICENSE

@@ -37,13 +37,13 @@ def gasp():
 def main(argvs):
     argc = len(argvs)
 
-    if argc != 3:
-        print "==> Usage: python %s font-file-name prefix" % argvs[0]
-        print "==>    eg. python %s msgothic.ttc rbf-tmp-ttf" % argvs[0]
+    if argc != 2:
+        print "==> Usage: python %s font-file-name" % argvs[0]
+        print "==>    eg. python %s msgothic.ttc" % argvs[0]
         quit()
 
     fontFSName = argvs[1]
-    tmpPrefix = argvs[2]
+    tmpPrefix = "breakttc"
 
     homeDir = os.path.expanduser("~")
     tempDir = tempfile.mkdtemp()
@@ -56,14 +56,14 @@ def main(argvs):
         # Get packed family names
         familyNames = fontforge.fontsInFile(homeDir + "/Downloads/fonts/" + fontFSName)
 
-        # Breake TTC. TTC => TTF.
+        # Break TTC. TTC => TTF.
         i = 0
         for familyName in familyNames:
             # openName: "msgothic.ttc(MS UI Gothic)"
             print "==> %s" % familyName
             openName = "%s(%s)" % (homeDir + "/Downloads/fonts/" + fontFSName, familyName)
 
-            # tmp file name: rbf-tmp-ttf0a.ttf and rbf-tmp-ttf1a.ttf and so on.
+            # tmp file name: breakttf0a.ttf and breakttf1a.ttf and so on.
             tmpTTF = "%s%da.ttf" % (tmpPrefix, i)
 
             # Open font
