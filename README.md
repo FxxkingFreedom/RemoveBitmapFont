@@ -41,14 +41,22 @@ python removebitmap.py msgothic.ttc
 
 ```
 Move new font in ~/Downloads/fonts/ to Windows.
-Exec rmDefaultFonts.bat as administrator.
 ```
 
 
 ### Step 3
 
 ```
-Double-click new msgothic.ttc and click 'Install' button.
+Double-click new font and click 'Install' button.
+```
+
+
+### Step 4
+
+```
+exec regedit
+    - HKLM\software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink
+    - HKLM\software\Microsoft\Windows NT\CurrentVersion\Fonts
 Reboot Windows.
 ```
 
