@@ -10,6 +10,15 @@ In a following screen shot, Windows font rendering is only smoothing any font si
 
 ![result](./images/msgss.png)
 
+GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ！
+
+![result](./images/cmd-ss.png)
+![result](./images/edge-ss.png)
+![result](./images/flashctl-ss.png)
+![result](./images/notepad-ss.png)
+![result](./images/tw-ss.png)
+
+
 | フォント                      | 結果 | 備考        |
 |:------------------------------|:----:|:------------|
 | msgothic.ttc (MS Gothic)      | OK   | No problem. |
