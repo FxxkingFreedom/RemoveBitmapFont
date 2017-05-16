@@ -1,6 +1,6 @@
 # These are scripts that remove a part of GASP table and bitmap data in Microsoft TrueType Collection font.
 
-Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するようになったということで、GASP テーブルの不要部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。まだ、FreeType にすら劣りますが、これまでのレンダリングと比べたらものすごいマシです。MS が日本語を無視してから約二十年、長かった...。
+Windows 10 Creators Update で ClearType が[縦方向に Anti-Alias するようになった](http://silight.hatenablog.jp/entry/2017/05/03/144138)ということで、GASP テーブルの不要部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。まだ、FreeType にすら劣りますが、これまでのレンダリングと比べたらものすごいマシです。MS が日本語を無視してから約二十年、長かった...。
 
 ClearType do vertical Anti-Alias on Windows 10 Creators Update. Well, some fonts become beautiful when you only remove unnecessary information, for example, a part of GASP table. It pasts about 20 years since MS ignore Japanese. It is long long time very much.
 
@@ -12,11 +12,28 @@ In a following screen shot, Windows font renderer executes only smoothing even a
 
 GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ！
 
+- cmd (MS Gothic)
+
 ![result](./images/cmd-ss.png)
+
+- Edge
+
 ![result](./images/edge-ss.png)
+
+- Flash Player Manager (MS UI Gothic)
+
 ![result](./images/flashctl-ss.png)
+
+- Install Sheld (MS UI Gothic?)
+
 ![result](./images/installer-ss.png)
+
+- notepad (MS Gothic)
+
 ![result](./images/notepad-ss.png)
+
+- Store App (Twitter (YuGoth*))
+
 ![result](./images/tw-ss.png)
 
 
