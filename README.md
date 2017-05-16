@@ -1,12 +1,12 @@
-# These are scripts that edit GASP table and remove bitmap part in Microsoft TrueType Collection font.
+# These are scripts that remove a part of GASP table and bitmap data in Microsoft TrueType Collection font.
 
-Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するようになったということで、GASP の要らない部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。MS から日本語が無視されて約二十年、長かった...
+Windows 10 Creators Update で ClearType が縦方向に Anti-Alias するようになったということで、GASP テーブルの不要部分を削除するだけで(まあまあ)綺麗に表示されるようになりました。まだ、FreeType にすら劣りますが、これまでのレンダリングと比べたらものすごいマシです。MS が日本語を無視してから約二十年、長かった...。
 
-ClearType do vertical Anti-Alias on Windows 10 Creators Update. Well, some fonts become beautiful when you only edit or remove unnecessary information, for example, GASP and EDBD table. It pasts about 20 years since MS ignore Japanese. It is long long time very much.
+ClearType do vertical Anti-Alias on Windows 10 Creators Update. Well, some fonts become beautiful when you only remove unnecessary information, for example, a part of GASP table. It pasts about 20 years since MS ignore Japanese. It is long long time very much.
 
-下記スクショは、msgothic, meiryo[b], YuGothic[BLMR] の GASP を編集し、どのフォントサイズでもスムージングのみするようにしたものです。映ってる大部分が源真じゃあないかってのはありますが、分かる人が見れば分かるからってことで許してください。hook 系アプリが要らないというのはいい感じです。
+下のスクショは、msgothic, meiryo[b], YuGoth[BLMR] の GASP テーブルの一部とビットマップフォントデータを削除し、どのフォントサイズでもスムージングのみするようにしたものです。映ってる大部分が源真じゃあないかってのはありますが、分かる人が見れば分かるからってことで許してください。hook 系アプリが必要ないので Windows Update でコケることはありません。ただ、Windows Update の度に sfc で時間かかります。
 
-In a following screen shot, Windows font rendering is only smoothing any font size by editing GASP table of msgothic, meiryo[b], YuGothic[BLMR]. Never hinting.
+In a following screen shot, Windows font renderer executes only smoothing even any font size by editing GASP table of msgothic, meiryo[b], YuGothic[BLMR]. Never hinting.
 
 ![result](./images/msgss.png)
 

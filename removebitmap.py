@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Usage: python %s step{1|3} font-file-name prefix
+# Usage: python %s font-file-name
 #
 # argv[1] ... font file name
-# argv[2] ... temporary file prefix
 #
-# eg. python pyFFctrl.py step1 meiryo.ttc rbf-tmp-ttf
+# eg. python removebitmap.py meiryo.ttc
 #
 
 import sys
