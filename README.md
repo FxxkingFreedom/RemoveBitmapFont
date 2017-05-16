@@ -15,19 +15,25 @@ GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ�
 ![result](./images/cmd-ss.png)
 ![result](./images/edge-ss.png)
 ![result](./images/flashctl-ss.png)
+![result](./images/installer-ss.png)
 ![result](./images/notepad-ss.png)
 ![result](./images/tw-ss.png)
 
 
-| フォント                      | 結果 | 備考        |
-|:------------------------------|:----:|:------------|
-| msgothic.ttc (MS Gothic)      | OK   | No problem. |
-| msgothic.ttc (MS PGothic)     | OK   | No problem. |
-| msgothic.ttc (MS UI Gothic)   | OK   | No problem. |
-| meiryo.ttc (Meiryo)           | OK   | No problem. |
-| meiryo.ttc (Meiryo Italic)    | OK   | No problem. |
-| meiryo.ttc (Meiryo UI)        | OK   | No problem. |
-| meiryo.ttc (Meiryo UI Italic) | OK   | No problem. |
+| フォント                            | 結果 | 備考        |
+|:------------------------------------|:----:|:------------|
+| msgothic.ttc (MS Gothic)            | OK   | No problem. |
+| msgothic.ttc (MS PGothic)           | OK   | No problem. |
+| msgothic.ttc (MS UI Gothic)         | OK   | No problem. |
+| meiryo.ttc (Meiryo)                 | OK   | No problem. |
+| meiryo.ttc (Meiryo Italic)          | OK   | No problem. |
+| meiryo.ttc (Meiryo UI)              | OK   | No problem. |
+| meiryo.ttc (Meiryo UI Italic)       | OK   | No problem. |
+| meiryob.ttc (Meiryo Bold)           | OK   | No problem. |
+| meiryob.ttc (Meiryo Italic Bold)    | OK   | No problem. |
+| meiryob.ttc (Meiryo UI Bold)        | OK   | No problem. |
+| meiryob.ttc (Meiryo UI Italic Bold) | OK   | No problem. |
+YuGo* の結果は割愛。
 
 
 ## USAGE
@@ -76,7 +82,7 @@ Enjoy!
 ## Changelog
 
 - decrease argc.
-- ricty 生成スクリプト群の shell スクリプトを使わなくても「Windows で幅広問題」を回避するようにしました。(ricty 同梱のスクリプトを meiryo に使うと文字化けします)
+- ricty 生成スクリプト群の os2version_riviser.sh を使わなくても「Windows で幅広問題」を回避するようにしました。(ricty 同梱のスクリプトを meiryo に使うと文字化けします)
 
 
 ## LICENSE
