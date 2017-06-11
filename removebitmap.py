@@ -42,25 +42,26 @@ def main(argvs):
         quit()
 
     fontFSName = argvs[1]
-    tmpPrefix = "breakttc"
 
+    tmpPrefix = "breakttc"
     homeDir = os.path.expanduser("~")
     tempDir = tempfile.mkdtemp()
-    print tempDir
+    workDir = "Downloads/fonts"
+    # print tempDir
 
     # font file exist
-    if os.path.exists(homeDir + "/Downloads/fonts/" + fontFSName):
+    if os.path.exists(homeDir + "/" + workDir + "/" + fontFSName):
         print "==> Start breaking TTC."
 
         # Get packed family names
-        familyNames = fontforge.fontsInFile(homeDir + "/Downloads/fonts/" + fontFSName)
+        familyNames = fontforge.fontsInFile(homeDir + "/" + workDir + "/" + fontFSName)
 
         # Break TTC. TTC => TTF.
         i = 0
         for familyName in familyNames:
-            # openName: "msgothic.ttc(MS UI Gothic)"
+            # openName format: "msgothic.ttc(MS UI Gothic)"
             print "==> %s" % familyName
-            openName = "%s(%s)" % (homeDir + "/Downloads/fonts/" + fontFSName, familyName)
+            openName = "%s(%s)" % (homeDir + "/" + workDir + "/" + fontFSName, familyName)
 
             # tmp file name: breakttf0a.ttf and breakttf1a.ttf and so on.
             tmpTTF = "%s%da.ttf" % (tmpPrefix, i)
@@ -97,7 +98,7 @@ def main(argvs):
             f.generateTtc(tempDir + "/" + newTTCname, (fontX), ttcflags=("merge",), layer=1)
 
             if os.path.exists(tempDir + "/" + newTTCname):
-                os.rename(tempDir + "/" + newTTCname, homeDir + "/Downloads/fonts/" + newTTCname)
+                os.rename(tempDir + "/" + newTTCname, homeDir + "/" + workDir + "/" + newTTCname)
             else:
                 print "==> new TTC not found."
                 quit()
@@ -113,9 +114,12 @@ def main(argvs):
 
         shutil.rmtree(tempDir)
 
+        print "==> Finish all."
+
     # file not found
     else:
         print "==> File not found."
+        print ""
 
 if __name__ == '__main__':
     main(sys.argv)
