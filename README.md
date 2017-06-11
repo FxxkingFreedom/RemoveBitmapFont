@@ -37,6 +37,8 @@ GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ�
 ![result](./images/tw-ss.png)
 
 
+## Result
+
 | フォント                            | 結果 | 備考        |
 |:------------------------------------|:----:|:------------|
 | msgothic.ttc (MS Gothic)            | OK   | No problem. |
@@ -50,6 +52,7 @@ GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ�
 | meiryob.ttc (Meiryo Italic Bold)    | OK   | No problem. |
 | meiryob.ttc (Meiryo UI Bold)        | OK   | No problem. |
 | meiryob.ttc (Meiryo UI Italic Bold) | OK   | No problem. |
+
 YuGo* の結果は割愛。
 
 
