@@ -99,6 +99,30 @@ Reboot Windows.
 Enjoy!
 
 
+## Registory files
+
+#### default-fonts.reg
+fonts レジストリのデフォルト。
+
+#### default-systemlink.reg
+systemlink レジストリのデフォルト。
+
+#### gamma-value.reg
+某掲示板情報によると未だに Cleartype Tuner にはバグがあり、一度でも使うと gamma 値が固定されてしまうそうな。
+
+#### nohinting-gm.reg
+msgothic と meiryo[b] のフォントファイルを差し替える fonts レジストリ。
+
+#### nohinting-gmy.reg
+msgothic と meiryo[b] と YuGoth[BLMR] のフォントファイルを差し替える fonts レジストリ。
+
+#### nohinting-systemlink-gm.reg
+msgothic と meiryo[b] のリンク先を差し替える systemlink レジストリ。
+
+#### nohinting-systemlink-gmy.reg
+msgothic と meiryo[b] と YuGoth[BLMR] のリンク先を差し替える systemlink レジストリ。
+
+
 ## Changelog
 
 - decrease argc.
