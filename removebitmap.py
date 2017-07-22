@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Usage: python %s font-file-name
-#
-# argv[1] ... font file name
-#
+#    argv[1] ... font file name
 # eg. python removebitmap.py meiryo.ttc
 #
 
@@ -21,6 +19,7 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 # TTF flags
 flags = ('opentype', 'round')
 
+#
 # antialias: Hints are not applied, use grayscale smoothing.
 # gridfit: Use hinting in Windows.
 # gridfit+smoothing: ClearType GridFitting.
@@ -34,6 +33,16 @@ def gasp():
     )
 
 def main(argvs):
+    #
+    # Set work directory and save director.
+    # Please apply these to your environment.
+    #
+    workDir = "Downloads/fonts"
+    saveDir = "Downloads/fonts/new"
+
+    #
+    # DO NOT CHANGE BELLOW.
+    #
     argc = len(argvs)
 
     if argc != 2:
@@ -46,7 +55,6 @@ def main(argvs):
     tmpPrefix = "breakttc"
     homeDir = os.path.expanduser("~")
     tempDir = tempfile.mkdtemp()
-    workDir = "Downloads/fonts"
     # print tempDir
 
     # font file exist
@@ -83,7 +91,7 @@ def main(argvs):
         print "==> Finish breaking TTC."
 
         print "==> Starting generate TTC."
-        newTTCname = 'new_' + fontFSName
+        newTTCname = fontFSName
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
         fontX = []
 
@@ -98,7 +106,8 @@ def main(argvs):
             f.generateTtc(tempDir + "/" + newTTCname, (fontX), ttcflags=("merge",), layer=1)
 
             if os.path.exists(tempDir + "/" + newTTCname):
-                os.rename(tempDir + "/" + newTTCname, homeDir + "/" + workDir + "/" + newTTCname)
+                # os.rename(tempDir + "/" + newTTCname, homeDir + "/" + saveDir + "/" + newTTCname)
+                shutil.move(tempDir + "/" + newTTCname, homeDir + "/" + saveDir + "/" + newTTCname)
             else:
                 print "==> new TTC not found."
                 quit()
