@@ -106,7 +106,6 @@ def main(argvs):
             f.generateTtc(tempDir + "/" + newTTCname, (fontX), ttcflags=("merge",), layer=1)
 
             if os.path.exists(tempDir + "/" + newTTCname):
-                # os.rename(tempDir + "/" + newTTCname, homeDir + "/" + saveDir + "/" + newTTCname)
                 shutil.move(tempDir + "/" + newTTCname, homeDir + "/" + saveDir + "/" + newTTCname)
             else:
                 print "==> new TTC not found."
