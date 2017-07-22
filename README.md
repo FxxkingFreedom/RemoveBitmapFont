@@ -50,10 +50,11 @@ GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ�
 
 ## USAGE
 ### Step 0
-- Install fontforge (20161012_1) ~~and python-fontforge~~.
+- Install fontforge (20161012_1) with python extension.
    * If you use Mac, install fontforge via [homebrew](https://brew.sh).
    * If you use Linux or WSL, install fontforge via [linuxbrew](http://linuxbrew.sh).
-   * I confirm this script on EL Capitan, Sierra, High Sierra, WSL.
+   * If you use Raspberry Pi, install fontforge from tarball.
+   * I confirm this script on EL Capitan, Sierra, High Sierra, WSL, Raspberry Pi.
 - Copy your msgothic.ttc from Windows to working directory.
    * mkdir -p ~/Downloads/fonts
 - Make save directory
