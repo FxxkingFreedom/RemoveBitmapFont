@@ -23,13 +23,13 @@ YuGo* の結果は割愛。
 
 
 ### Screenshot
-GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ！下のスクショは、msgothic, meiryo[b], YuGoth[BLMR] の GASP テーブルの一部とビットマップフォントデータを削除し、どのフォントサイズでもスムージングのみ、すなわち hinting を無視するようにしたものです。映ってる大部分が源真じゃあないかってのはありますが、分かる人が見れば分かると思います。hook 系アプリが必要ないので Windows Update でコケたり、特定のアプリが動かなかったり、GSOD になったり、ということはありません。
+GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ！下のスクショは、msgothic, meiryo[b], YuGoth[BLMR] の GASP テーブルの一部とビットマップフォントデータを削除し、どのフォントサイズでもスムージングのみ、すなわち hinting を無視するようにしたものです。映ってる大部分が源真ゴシックじゃあないかというのはありますが、分かる人が見れば分かると思います。hook 系アプリが必要ないので Windows Update でコケたり、特定のアプリが動かなかったり、GSOD になったり、ということはありません。
 
 本来ならフォントデータをいじるのではなく、ClearType が hinting 情報とフォントサイズ依存情報を無視すべきだと思うのですが、未だに MS はそれをしないのが理解できません。
 
 ![result](./images/msgss.png)
 
-個別にスクショを撮りました。GitHub 上では分からないと思いますので画像をダウンロードして、画像ビューワでご覧ください。
+アプリ個別のスクショは以下の通りです。GitHub 上では分からないと思いますので画像をダウンロードして、画像ビューワで実物大でご覧ください。
 
 ### cmd (MS Gothic)
 bash.exe もこの描画になるので WSL で色々と遊びたくなります。
@@ -37,7 +37,7 @@ bash.exe もこの描画になるので WSL で色々と遊びたくなります
 ![result](./images/cmd-ss.png)
 
 ### Edge
-このスクショでは Meiryo を表示しています。ClearType + 既存 Meiryo 特有の崩れた字体にならずバランスがとても良くなります。
+このスクショでは主に Meiryo を表示しています。ClearType + 既存 Meiryo 特有の崩れた字体にならずバランスがとても良くなります。
 
 ![result](./images/edge-ss.png)
 
@@ -51,9 +51,11 @@ bash.exe もこの描画になるので WSL で色々と遊びたくなります
 ![result](./images/notepad-ss.png)
 
 ### Store App (YuGoth*)
-YuGothic 系は違いが小さいですが、文字によって字体のバランスが良くなっています。やはり今までの ClearType は害悪。
+YuGothic 系は違いが小さくて分かりづらいですが、文字によって字体のバランスが良くなっています。やはり今までの ClearType は害悪なのでは？ボブは訝しんだ。
 
 ![result](./images/tw-ss.png)
+
+msmincho や segoue などの GASP もいじれば Windows ももっと見栄えが良くなると思います。ですがやはり ClearType 側で色々な情報を無視してくれるのが一番なのですが MS はどうして分かってくれないのでしょうか。
 
 
 ## USAGE
@@ -62,10 +64,10 @@ This script makes a core dump on old fontforge. So please install new fontforge.
 
 - Install fontforge (2016xxxx or higher) with python extension.
    * If you use Mac, install fontforge via [homebrew](https://brew.sh).
-   * If you use Linux or WSL, install fontforge via [linuxbrew](http://linuxbrew.sh). See [here](./howto-install-fontforge.md)
-   * If you use Raspberry Pi 3, install fontforge from tarball. See [here](./howto-install-fontforge.md)
+   * If you use Linux or WSL, install fontforge via [linuxbrew](http://linuxbrew.sh). See [here](./howto-install-fontforge.md).
+   * If you use Raspberry Pi 3, install fontforge from tarball. See [here](./howto-install-fontforge.md).
 
-I confirm this script on EL Capitan, Sierra, High Sierra, WSL, Raspberry Pi 3.
+I confirm this script on EL Capitan, Sierra, High Sierra, WSL (Xenial), Raspberry Pi 3 (Jessie).
 
 - Copy your font, eg msgothic.ttc, from Windows font directory to your working directory. Default working directory is ~/Downloads/fonts.
    * mkdir -p ~/Downloads/fonts
