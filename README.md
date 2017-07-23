@@ -1,4 +1,4 @@
-# These are script that removing a part of GASP table and bitmap data in Microsoft TrueType Collection font.
+# This is a python script that removing a part of GASP table and bitmap data in Microsoft TrueType Collection font.
 
 ## Description
 Windows 10 Creators Update で ClearType が[TTF でも縦方向に Anti-Alias するようになった](http://silight.hatenablog.jp/entry/2017/05/03/144138)ということなので、TTF 内の GASP テーブルの不要部分を削除しました。これだけで綺麗に表示されるようになりました。まだ、FreeType にすら劣りますが、これまでのフォントレンダリングと比べたらものすごいマシです。MS が日本語を無視してから約二十年、長かった...。
