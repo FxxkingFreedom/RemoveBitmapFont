@@ -11,6 +11,7 @@
 1. sudo make install
 1. add 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH' to your .bashrc
 
+### Result
 ![Screenshot](./images/rpi3ff-ss.png)
 
 ## For Windows Subsystem Linux (Bash on Windows)
@@ -19,3 +20,6 @@
 1. brew install -vd fontforge
 
     In this step, make check error happens in libxml2. So please choice '2: ignore'.
+
+### Result
+![Screenshot](./images/wslff-ss.png)
