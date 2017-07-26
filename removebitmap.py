@@ -19,26 +19,26 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 # TTF flags
 flags = ('opentype', 'round')
 
-#
+
 # antialias: Hints are not applied, use grayscale smoothing.
 # gridfit: Use hinting in Windows.
-# gridfit+smoothing: ClearType GridFitting.
-# symmetric-smoothing: ClearType Antialiasing.
+# gridfit+smoothing: ClearType GridFitting; (hinting with ClearType).
+# symmetric-smoothing: ClearType Antialiasing; (ClearType smoothing only).
 #
 # gridfit is hinting on Windows. So gridfit is unnecessary for me.
-#
 def gasp():
     return (
         (65535, ('antialias', 'symmetric-smoothing')),
     )
 
+
 def main(argvs):
-    #
-    # Set work directory and save director.
-    # Please apply these to your environment.
-    #
+    # Set work and save director. Please apply these to your environment.
     workDir = "Downloads/fonts"
     saveDir = "Downloads/fonts/new"
+
+    if not os.path.exists(saveDir):
+        os.makedirs(saveDir)
 
     #
     # DO NOT CHANGE BELLOW.
@@ -88,9 +88,10 @@ def main(argvs):
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
             i += 1
+
         print "==> Finish breaking TTC."
 
-        print "==> Starting generate TTC."
+        print "===> Starting generate TTC."
         newTTCname = fontFSName
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
         fontX = []
@@ -100,16 +101,22 @@ def main(argvs):
             fontX.append(fontOpen)
 
         # Generate TTC.
-        if len(fontX) > 1:
+        # TTC を扱うから複数じゃないと続行しない。
+        # やっぱり一つでもいいや。
+        if len(fontX) > 0:
             f = fontX[0]
             fontX.pop(0)
-            f.generateTtc(tempDir + "/" + newTTCname, (fontX), ttcflags=("merge",), layer=1)
+            f.generateTtc(tempDir + "/" + newTTCname,
+                          (fontX), ttcflags=("merge",),
+                          layer=1)
 
             if os.path.exists(tempDir + "/" + newTTCname):
-                shutil.move(tempDir + "/" + newTTCname, homeDir + "/" + saveDir + "/" + newTTCname)
+                shutil.move(tempDir + "/" + newTTCname,
+                            homeDir + "/" + saveDir + "/" + newTTCname)
             else:
                 print "==> new TTC not found."
                 quit()
+
         else:
             print "==> File not found or not enough fonts."
             quit()
@@ -118,7 +125,7 @@ def main(argvs):
             openedFont.close()
 
         f.close()
-        print "==> Generated TTC."
+        print "===> Finish generate TTC."
 
         shutil.rmtree(tempDir)
 
