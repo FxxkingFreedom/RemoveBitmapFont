@@ -28,7 +28,6 @@ flags = ('opentype', 'round')
 #
 # gridfit is hinting on Windows. So gridfit is unnecessary for me.
 #
-
 def gasp():
     return (
         (65535, ('antialias', 'symmetric-smoothing')),
@@ -37,7 +36,6 @@ def gasp():
 
 # Main function
 #
-
 def main(argvs):
     # Set work and save director. Please apply these to your environment.
     workDir = "Downloads/fonts"
