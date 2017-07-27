@@ -14,6 +14,7 @@ import os
 import shutil
 import subprocess
 
+# fontforge setting.
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
 
 # TTF flags
@@ -26,6 +27,8 @@ flags = ('opentype', 'round')
 # symmetric-smoothing: ClearType Antialiasing; (ClearType smoothing only).
 #
 # gridfit is hinting on Windows. So gridfit is unnecessary for me.
+#
+
 def gasp():
     return (
         (65535, ('antialias', 'symmetric-smoothing')),
@@ -50,26 +53,26 @@ def main(argvs):
         print "==>    eg. python %s msgothic.ttc" % argvs[0]
         quit()
 
+    # set variables.
     fontFSName = argvs[1]
-
     tmpPrefix = "breakttc"
     homeDir = os.path.expanduser("~")
     tempDir = tempfile.mkdtemp()
-    # print tempDir
+    fontPath = homeDir + "/" + workDir + "/" + fontFSName
 
     # font file exist
-    if os.path.exists(homeDir + "/" + workDir + "/" + fontFSName):
+    if os.path.exists(fontPath):
         print "==> Start breaking TTC."
 
         # Get packed family names
-        familyNames = fontforge.fontsInFile(homeDir + "/" + workDir + "/" + fontFSName)
+        familyNames = fontforge.fontsInFile(fontPath)
 
-        # Break TTC. TTC => TTF.
+        # Break a TTC to some TTFs.
         i = 0
         for familyName in familyNames:
             # openName format: "msgothic.ttc(MS UI Gothic)"
             print "==> %s" % familyName
-            openName = "%s(%s)" % (homeDir + "/" + workDir + "/" + fontFSName, familyName)
+            openName = "%s(%s)" % (fontPath, familyName)
 
             # tmp file name: breakttf0a.ttf and breakttf1a.ttf and so on.
             tmpTTF = "%s%da.ttf" % (tmpPrefix, i)
@@ -84,7 +87,7 @@ def main(argvs):
             font.os2_vendor = "maud"
             font.os2_version = 1 # Windows で幅広問題を回避する。
 
-            # Generate font
+            # ttf へ一時的に保存する。
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
             i += 1
@@ -92,10 +95,15 @@ def main(argvs):
         print "==> Finish breaking TTC."
 
         print "===> Starting generate TTC."
+
+        # set variables.
         newTTCname = fontFSName
+        newFontPath = tempDir + "/" + newTTCname
+        saveFontPath = homeDir + "/" + saveDir + "/" + newTTCname
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
         fontX = []
 
+        # fontX に複数の ttf を登録する。
         for file in files:
             fontOpen = fontforge.open(file)
             fontX.append(fontOpen)
@@ -106,32 +114,31 @@ def main(argvs):
         if len(fontX) > 0:
             f = fontX[0]
             fontX.pop(0)
-            f.generateTtc(tempDir + "/" + newTTCname,
-                          (fontX), ttcflags=("merge",),
-                          layer=1)
 
-            if os.path.exists(tempDir + "/" + newTTCname):
-                shutil.move(tempDir + "/" + newTTCname,
-                            homeDir + "/" + saveDir + "/" + newTTCname)
+            # fontX の中の複数の ttf を一つの ttc にする。
+            f.generateTtc(newFontPath, (fontX), ttcflags=("merge",), layer=1)
+
+            # temporary 内の ttc ファイルを保存先へ移動する。
+            if os.path.exists(newFontPath):
+                shutil.move(newFontPath, saveFontPath)
             else:
                 print "==> new TTC not found."
                 quit()
-
         else:
             print "==> File not found or not enough fonts."
             quit()
 
+        # 開いたフォントをそれぞれ閉じる。
         for openedFont in fontX:
             openedFont.close()
 
+        # 新しく生成した分のフォントも閉じる。
         f.close()
         print "===> Finish generate TTC."
 
+        # 念のため temporary directory を掃除しておく。
         shutil.rmtree(tempDir)
-
         print "==> Finish all."
-
-    # file not found
     else:
         print "==> File not found."
         print ""
