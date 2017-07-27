@@ -35,6 +35,9 @@ def gasp():
     )
 
 
+# Main function
+#
+
 def main(argvs):
     # Set work and save director. Please apply these to your environment.
     workDir = "Downloads/fonts"
@@ -43,9 +46,8 @@ def main(argvs):
     if not os.path.exists(saveDir):
         os.makedirs(saveDir)
 
-    #
-    # DO NOT CHANGE BELLOW.
-    #
+
+    ##### DO NOT CHANGE BELLOW. #####
     argc = len(argvs)
 
     if argc != 2:
@@ -116,7 +118,11 @@ def main(argvs):
             fontX.pop(0)
 
             # fontX の中の複数の ttf を一つの ttc にする。
-            f.generateTtc(newFontPath, (fontX), ttcflags=("merge",), layer=1)
+            f.generateTtc(newFontPath,
+                          (fontX),
+                          ttcflags=("merge",),
+                          layer=1
+            )
 
             # temporary 内の ttc ファイルを保存先へ移動する。
             if os.path.exists(newFontPath):
