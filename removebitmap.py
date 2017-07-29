@@ -91,11 +91,9 @@ def main(argvs):
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
             i += 1
-
         print "==> Finish breaking TTC."
 
         print "===> Starting generate TTC."
-
         # set variables.
         newTTCname = fontFSName
         newFontPath = tempDir + "/" + newTTCname
@@ -145,6 +143,7 @@ def main(argvs):
         print "==> Finish all."
     else:
         print "==> File not found."
+        print "==> Please copy font file from Windows to %s." % workDir
         print ""
 
 if __name__ == '__main__':
