@@ -23,7 +23,7 @@ YuGo* の結果は割愛。
 
 
 ### Screenshot
-GDI も DW もそこそこ綺麗になりました。縦方向 Anti-Alias の影響は大きいです。下のスクショは、msgothic.ttc, meiryo[b].ttc, YuGoth[BLMR].ttc の GASP テーブルの一部と msgothic.ttc のビットマップデータを削除することで、どのフォントサイズでもスムージングのみ、すなわち hinting を無視するようにしたものです。映ってる大部分が源真ゴシックじゃあないかというのはありますが、分かる人が見れば分かると思います。hook 系アプリを必要としないので Windows Update が失敗したり、特定のアプリが動かなかったり、GSOD になったり、ということはありません。
+GDI も DW もそこそこ綺麗になりました。縦方向 Anti-Alias の影響は大きいです。下のスクショは、msgothic.ttc, meiryo[b].ttc, YuGoth[BLMR].ttc の GASP テーブルを編集し msgothic.ttc のビットマップデータを削除することで、どのフォントサイズでもスムージングのみ、すなわち hinting を無視するようにしたものです。映ってる大部分が源真ゴシックじゃあないかというのはありますが、分かる人が見れば分かると思います。hook 系アプリを必要としないので Windows Update が失敗したり、特定のアプリが動かなかったり、GSOD になったり、ということはありません。
 
 本来ならばフォントデータに手を加えるのではなく、ClearType が GASP テーブルを無視すべきだと思うのですが、未だに MS はそれをしないのが理解できません。例えば ClearType tuner に hinting を無視するオプションを追加して、ここが ON なら GASP テーブルを無視するとかでもいいんじゃないかと思います。
 
@@ -66,10 +66,9 @@ This script makes a core dump on old fontforge. So please install new fontforge.
    * If you use Mac, install fontforge via [homebrew](https://brew.sh).
    * If you use Linux or WSL, install fontforge via [linuxbrew](http://linuxbrew.sh). See [here](./howto-install-fontforge.md).
    * If you use Raspberry Pi 3, install fontforge from tarball. See [here](./howto-install-fontforge.md).
+- Copy your font, eg msgothic.ttc, from Windows font directory to your working directory. Default working directory is ~/Downloads/fonts.
 
 I confirm this script on EL Capitan, Sierra, High Sierra, WSL (Xenial), Raspberry Pi 3 (Jessie).
-
-- Copy your font, eg msgothic.ttc, from Windows font directory to your working directory. Default working directory is ~/Downloads/fonts.
 
 
 ### Step 1 (on Mac or on Linux)
@@ -80,19 +79,19 @@ python removebitmap.py msgothic.ttc
 
 ### Step 2 (on Mac or on Linux and on Windows)
 ```
-Move new fonts in ~/Downloads/fonts/new to Windows folder.
+Move new fonts in ~/Downloads/fonts/new to Windows something folder.
 ```
 
 
 ### Step 3 (on Windows)
 ```
-Double click new font and click 'Install' button on Windows.
+Double click new font on Windows and click 'Install' button.
 ```
 
 
 ### Step 4 (on Windows)
 ```
-exec regedit
+exec regedit and edit bellow.
     - HKLM\software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink
     - HKLM\software\Microsoft\Windows NT\CurrentVersion\Fonts
 ```
