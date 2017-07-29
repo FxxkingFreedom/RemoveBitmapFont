@@ -114,7 +114,7 @@ HKLM\\...\\CurrentVersion\\Fonts レジストリのデフォルト。
 HKLM\\...\\CurrentVersion\\Fontlink\\SystemLink レジストリのデフォルト。
 
 ### gamma-value.reg
-某掲示板情報によると未だに Cleartype Tuner にはバグがあり、一度でも Cleartype Tuner を使うと gamma 値が固定されてしまうそうな。
+某掲示板情報によると未だに Cleartype Tuner にはバグがあり、一度でも Cleartype Tuner を使うと Gamma 値が固定されてしまうそうな。
 
 ### nohinting-gm.reg
 msgothic と meiryo[b] の読み込み先を差し替える fonts レジストリ。
