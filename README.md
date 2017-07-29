@@ -87,7 +87,7 @@ Move new fonts in ~/Downloads/fonts/new to Windows something folder.
 ```
 Double click new font on Windows and click 'Install' button.
 ```
-
+If you install new font once, you do not have to do step 1, 2, 3 even major upgrade Windows.
 
 ### Step 4 (on Windows)
 ```
