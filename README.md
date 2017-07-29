@@ -1,31 +1,31 @@
 # This is a python script that removing a part of GASP table and bitmap data in Microsoft TrueType Collection font.
 
 ## Description
-Windows 10 Creators Update で ClearType が[TTF でも縦方向に Anti-Alias するようになった](http://silight.hatenablog.jp/entry/2017/05/03/144138)ということなので、TTF 内の GASP テーブルの不要部分を削除しました。これだけで綺麗に表示されるようになりました。まだ、FreeType にすら劣りますが、これまでのフォントレンダリングと比べたらものすごいマシです。MS が日本語を無視してから約二十年、長かった...。
+Windows 10 Creators Update で ClearType が[TTF でも縦方向に Anti-Alias するようになった](http://silight.hatenablog.jp/entry/2017/05/03/144138)ということなので、TTF 内の GASP テーブルの不要部分を削除しました。これをするだけで比較的綺麗にフォントが描画されるようになりました。まだ、FreeType にすら劣りますが、これまでのフォントレンダリングと比べたらものすごいマシです。MS が日本語を無視してから約二十年、長かった...。
 
 
 ## Result
-| フォント                            | 結果 | 備考        |
-|:------------------------------------|:----:|:------------|
-| msgothic.ttc (MS Gothic)            | OK   | No problem. |
-| msgothic.ttc (MS PGothic)           | OK   | No problem. |
-| msgothic.ttc (MS UI Gothic)         | OK   | No problem. |
-| meiryo.ttc (Meiryo)                 | OK   | No problem. |
-| meiryo.ttc (Meiryo Italic)          | OK   | No problem. |
-| meiryo.ttc (Meiryo UI)              | OK   | No problem. |
-| meiryo.ttc (Meiryo UI Italic)       | OK   | No problem. |
-| meiryob.ttc (Meiryo Bold)           | OK   | No problem. |
-| meiryob.ttc (Meiryo Italic Bold)    | OK   | No problem. |
-| meiryob.ttc (Meiryo UI Bold)        | OK   | No problem. |
-| meiryob.ttc (Meiryo UI Italic Bold) | OK   | No problem. |
+| Fonts                               | Result | Note        |
+|:------------------------------------|:------:|:------------|
+| msgothic.ttc (MS Gothic)            | OK     | No problem. |
+| msgothic.ttc (MS PGothic)           | OK     | No problem. |
+| msgothic.ttc (MS UI Gothic)         | OK     | No problem. |
+| meiryo.ttc (Meiryo)                 | OK     | No problem. |
+| meiryo.ttc (Meiryo Italic)          | OK     | No problem. |
+| meiryo.ttc (Meiryo UI)              | OK     | No problem. |
+| meiryo.ttc (Meiryo UI Italic)       | OK     | No problem. |
+| meiryob.ttc (Meiryo Bold)           | OK     | No problem. |
+| meiryob.ttc (Meiryo Italic Bold)    | OK     | No problem. |
+| meiryob.ttc (Meiryo UI Bold)        | OK     | No problem. |
+| meiryob.ttc (Meiryo UI Italic Bold) | OK     | No problem. |
 
 YuGo* の結果は割愛。
 
 
 ### Screenshot
-GDI も DW もそこそこ綺麗になりました。縦方向 AA がデカイ！下のスクショは、msgothic, meiryo[b], YuGoth[BLMR] の GASP テーブルの一部とビットマップフォントデータを削除し、どのフォントサイズでもスムージングのみ、すなわち hinting を無視するようにしたものです。映ってる大部分が源真ゴシックじゃあないかというのはありますが、分かる人が見れば分かると思います。hook 系アプリが必要ないので Windows Update でコケたり、特定のアプリが動かなかったり、GSOD になったり、ということはありません。
+GDI も DW もそこそこ綺麗になりました。縦方向 Anti-Alias の影響は大きいです。下のスクショは、msgothic.ttc, meiryo[b].ttc, YuGoth[BLMR].ttc の GASP テーブルの一部と msgothic.ttc のビットマップデータを削除することで、どのフォントサイズでもスムージングのみ、すなわち hinting を無視するようにしたものです。映ってる大部分が源真ゴシックじゃあないかというのはありますが、分かる人が見れば分かると思います。hook 系アプリを必要としないので Windows Update が失敗したり、特定のアプリが動かなかったり、GSOD になったり、ということはありません。
 
-本来ならフォントデータをいじるのではなく、ClearType が hinting 情報とフォントサイズ依存情報を無視すべきだと思うのですが、未だに MS はそれをしないのが理解できません。
+本来ならばフォントデータに手を加えるのではなく、ClearType が GASP テーブルを無視すべきだと思うのですが、未だに MS はそれをしないのが理解できません。例えば ClearType tuner に hinting を無視するオプションを追加して、ここが ON なら GASP テーブルを無視するとかでもいいんじゃないかと思います。
 
 ![result](./images/msgss.png)
 
@@ -37,7 +37,7 @@ bash.exe もこの描画になるので WSL で色々と遊びたくなります
 ![result](./images/cmd-ss.png)
 
 ### Edge
-このスクショでは主に Meiryo を表示しています。ClearType + 既存 Meiryo 特有の崩れた字体にならずバランスがとても良くなります。
+このスクショでは主に Meiryo を表示しています。ClearType と既存の Meiryo で特有の崩れた字体にならずバランスがとても良くなります。
 
 ![result](./images/edge-ss.png)
 
@@ -51,11 +51,11 @@ bash.exe もこの描画になるので WSL で色々と遊びたくなります
 ![result](./images/notepad-ss.png)
 
 ### Store App (YuGoth*)
-YuGothic 系は違いが小さくて分かりづらいですが、文字によって字体のバランスが良くなっています。やはり今までの ClearType は害悪なのでは？ボブは訝しんだ。
+YuGothic 系は違いが小さくて分かりづらいですが、文字によって字体のバランスが良くなります。やはり今までの ClearType は害悪なのでは？ボブは訝しんだ。
 
 ![result](./images/tw-ss.png)
 
-msmincho や segoue などの GASP もいじれば Windows ももっと見栄えが良くなると思います。ですがやはり ClearType 側で色々な情報を無視してくれるのが一番なのですが MS はどうして分かってくれないのでしょうか。
+msmincho や segoue などの GASP もいじれば統一感が出て Windows の見栄えもより良くなると思います。個人的には ClearType 側で GASP を無視してくれるのが一番なのですが MS はどうして分かってくれないのでしょうか。
 
 
 ## USAGE
@@ -70,35 +70,36 @@ This script makes a core dump on old fontforge. So please install new fontforge.
 I confirm this script on EL Capitan, Sierra, High Sierra, WSL (Xenial), Raspberry Pi 3 (Jessie).
 
 - Copy your font, eg msgothic.ttc, from Windows font directory to your working directory. Default working directory is ~/Downloads/fonts.
-   * mkdir -p ~/Downloads/fonts
-- Create save directory.
-   * mkdir ~/Downloads/fonts/new
 
 
-### Step 1
+### Step 1 (on Mac or on Linux)
 ```
 python removebitmap.py msgothic.ttc
 ```
 
 
-### Step 2
+### Step 2 (on Mac or on Linux and on Windows)
 ```
-Move new fonts in ~/Downloads/fonts/new to Windows.
-```
-
-
-### Step 3
-```
-Double click new font and click 'Install' button.
+Move new fonts in ~/Downloads/fonts/new to Windows folder.
 ```
 
 
-### Step 4
+### Step 3 (on Windows)
+```
+Double click new font and click 'Install' button on Windows.
+```
+
+
+### Step 4 (on Windows)
 ```
 exec regedit
     - HKLM\software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink
     - HKLM\software\Microsoft\Windows NT\CurrentVersion\Fonts
+```
 
+
+### Step 5 (on Windows)
+```
 Reboot Windows.
 ```
 
@@ -115,6 +116,8 @@ HKLM\\...\\CurrentVersion\\Fontlink\\SystemLink レジストリのデフォル�
 
 ### gamma-value.reg
 某掲示板情報によると未だに Cleartype Tuner にはバグがあり、一度でも Cleartype Tuner を使うと gamma 値が固定されてしまうそうな。
+
+According to major BBS, ClearType Tuner has still a bug that fix a Gamma value everything.
 
 ### nohinting-gm.reg
 msgothic と meiryo[b] の読み込み先を差し替える fonts レジストリ。
