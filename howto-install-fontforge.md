@@ -9,7 +9,7 @@
 1. ./bootstrap && ./configure --enable-pyextension --without-x [^1]
 1. make
 1. sudo make install
-1. add 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH' to your .bashrc [^2]
+1. add 'export LD\_LIBRARY\_PATH=/usr/local/lib:$LD\_LIBRARY\_PATH' to your .bashrc [^2]
 
 ### Result
 ![Screenshot](./images/rpi3ff-ss.png)
