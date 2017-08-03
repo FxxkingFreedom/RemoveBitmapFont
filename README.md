@@ -55,7 +55,7 @@ YuGothic 系は違いが小さくて分かりづらいですが、文字によ�
 
 ![result](./images/tw-ss.png)
 
-msmincho や segoue などの GASP もいじれば統一感が出て Windows の見栄えもより良くなると思います。個人的には ClearType 側で GASP を無視してくれるのが一番なのですが MS はどうして分かってくれないのでしょうか。
+msmincho や segoue などの GASP もいじれば統一感が出て Windows の見映えもより良くなると思います。個人的には ClearType 側で GASP を無視してくれるのが一番なのですが MS はどうして分かってくれないのでしょうか。
 
 
 ## USAGE
