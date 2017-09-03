@@ -54,23 +54,22 @@ def main(argvs):
     argc = len(argvs)
 
     if argc != 2:
-        print "==> Usage: python %s /path/dir" % argvs[0]
-        print "==>    eg. python %s ~/Downloads/fonts" % argvs[0]
+        print "Usage: python %s /path/dir" % argvs[0]
+        print "   eg. python %s ~/Downloads/fonts" % argvs[0]
         quit()
 
-    """ workDir 内の ttc を探して配列に入れて for で回す。 """
+    """ workDir 内の *.ttc を配列に入れて for で回す。 """
     fontFiles = glob.glob(argvs[1]+'/*.ttc')
 
     for fontFile in fontFiles:
         # set variables.
         fontFSName = os.path.basename(fontFile)
         fontPath = fontFile
-        print fontPath
         tmpPrefix = "breakttc"
         tempDir = tempfile.mkdtemp()
 
 
-        print "==> Start breaking TTC."
+        print "=> Start breaking TTC."
         # Get packed family names
         familyNames = fontforge.fontsInFile(fontPath)
         i = 0
@@ -98,10 +97,10 @@ def main(argvs):
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
             i += 1
-        print "==> Finish breaking TTC."
+        print "=> Finish breaking TTC."
 
 
-        print "===> Starting generate TTC."
+        print "===> Start generate TTC."
         # set variables.
         newTTCname = fontFSName
         newFontPath = tempDir + "/" + newTTCname
@@ -132,10 +131,10 @@ def main(argvs):
             if os.path.exists(newFontPath):
                 shutil.move(newFontPath, saveFontPath)
             else:
-                print "==> new TTC not found."
+                print "===> new TTC not found."
                 quit()
         else:
-            print "==> File not found or not enough fonts."
+            print "===> File not found or not enough fonts."
             quit()
 
         # 開いたフォントをそれぞれ閉じる。
@@ -148,7 +147,8 @@ def main(argvs):
 
         # 念のため temporary directory を掃除しておく。
         shutil.rmtree(tempDir)
-        print "==> Finish all."
+        print "=> Finish."
+    print "Finish all in dir."
 
 if __name__ == '__main__':
     main(sys.argv)
