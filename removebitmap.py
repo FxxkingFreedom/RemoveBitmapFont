@@ -17,6 +17,7 @@ import subprocess
 # fontforge setting.
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
 
+
 # TTF flags
 flags = ('opentype', 'round')
 
@@ -68,13 +69,13 @@ def main(argvs):
         tmpPrefix = "breakttc"
         tempDir = tempfile.mkdtemp()
 
-        print "==> Start breaking TTC."
 
+        print "==> Start breaking TTC."
         # Get packed family names
         familyNames = fontforge.fontsInFile(fontPath)
+        i = 0
 
         # Break a TTC to some TTFs.
-        i = 0
         for familyName in familyNames:
             # openName format: "msgothic.ttc(MS UI Gothic)"
             print "==> %s" % familyName
@@ -99,8 +100,8 @@ def main(argvs):
             i += 1
         print "==> Finish breaking TTC."
 
-        print "===> Starting generate TTC."
 
+        print "===> Starting generate TTC."
         # set variables.
         newTTCname = fontFSName
         newFontPath = tempDir + "/" + newTTCname
