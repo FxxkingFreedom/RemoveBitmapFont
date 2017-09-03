@@ -1,6 +1,7 @@
 # Howto Install Fontforge.
 
 ## For Raspberry Pi 3 Jessie
+
 1. sudo apt-get update
 1. sudo apt-get upgrade
 1. sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev libglib2.0 libglib2.0-dev
@@ -12,20 +13,21 @@
 1. add 'export LD\_LIBRARY\_PATH=/usr/local/lib:$LD\_LIBRARY\_PATH' to your .bashrc [^2]
 
 ### Result
+
 ![Screenshot](./images/rpi3ff-ss.png)
 
------
-
 ## For Windows Subsystem Linux (Bash on Windows)
+
 1. Install [linuxbrew](http://linuxbrew.sh)
 1. ln -s \`which gcc\` \`brew --prefix\`/bin/gcc-5.4
 1. brew install -vd fontforge [^3]
 1. add 'export LD\_LIBRARY\_PATH=/home/linuxbrew/.linuxbrew/lib:$LD\_LIBRARY\_PATH' to your .bashrc
 
 ### Result
-Windows だけで完結するのが嬉しい。[^4]
 
 ![Screenshot](./images/wslff-ss.png)
+
+Windows だけで完結するのが嬉しい。[^4]
 
 -----
 

@@ -25,13 +25,15 @@ I confirm this script on EL Capitan, Sierra, High Sierra, WSL (Xenial), Raspberr
 ### Step 1 (on Mac or on Linux)
 
 ```
-python removebitmap.py msgothic.ttc
+python removebitmap.py firname
+ex)
+python removebitmap.py ~/Downloads/fonts
 ```
 
 ### Step 2 (on Mac or on Linux and on Windows)
 
 ```
-Move new fonts in ~/Downloads/fonts/new to Windows something folder.
+Move new fonts in ~/Downloads/fonts/new/ to Windows something folder.
 ```
 
 ### Step 3 (on Windows)

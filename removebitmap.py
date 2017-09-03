@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Usage: python %s font-file-name
-#    argv[1] ... font file name
-# eg. python removebitmap.py meiryo.ttc
-#
+"""
+Usage: python %s path
+   argv[1] ... path
+eg. python removebitmap.py ~/Downloads/fonts
+"""
 
 import sys
 import glob
@@ -21,47 +21,53 @@ fontforge.setPrefs('CoverageFormatsAllowed', 1)
 flags = ('opentype', 'round')
 
 
-# antialias: Hints are not applied, use grayscale smoothing.
-# gridfit: Use hinting in Windows.
-# gridfit+smoothing: ClearType GridFitting; (hinting with ClearType).
-# symmetric-smoothing: ClearType Antialiasing; (ClearType smoothing only).
-#
-# gridfit is hinting on Windows. So gridfit is unnecessary for me.
-#
+"""
+antialias: Hints are not applied, use grayscale smoothing.
+gridfit: Use hinting in Windows.
+gridfit+smoothing: ClearType GridFitting; (hinting with ClearType).
+symmetric-smoothing: ClearType Antialiasing; (ClearType smoothing only).
+
+gridfit is hinting on Windows. So gridfit is unnecessary for me.
+"""
 def gasp():
     return (
         (65535, ('antialias', 'symmetric-smoothing')),
     )
 
 
-# Main function
-#
+"""
+Main function
+"""
 def main(argvs):
     # Set work and save director. Please apply these to your environment.
-    workDir = "Downloads/fonts"
-    saveDir = "Downloads/fonts/new"
+    workDir = argvs[1]
+    saveDir = workDir + "/new"
 
     if not os.path.exists(saveDir):
         os.makedirs(saveDir)
 
 
-    ##### DO NOT CHANGE BELLOW. #####
+    """
+    DO NOT CHANGE BELLOW.
+    """
     argc = len(argvs)
 
     if argc != 2:
-        print "==> Usage: python %s font-file-name" % argvs[0]
-        print "==>    eg. python %s msgothic.ttc" % argvs[0]
+        print "==> Usage: python %s /path/dir" % argvs[0]
+        print "==>    eg. python %s ~/Downloads/fonts" % argvs[0]
         quit()
 
-    # set variables.
-    fontFSName = argvs[1]
-    tmpPrefix = "breakttc"
-    homeDir = os.path.expanduser("~")
-    tempDir = tempfile.mkdtemp()
-    fontPath = homeDir + "/" + workDir + "/" + fontFSName
+    """ workDir 内の ttc を探して配列に入れて for で回す。 """
+    fontFiles = glob.glob(argvs[1]+'/*.ttc')
 
-    # font file exist
-    if os.path.exists(fontPath):
+    for fontFile in fontFiles:
+        # set variables.
+        fontFSName = os.path.basename(fontFile)
+        fontPath = fontFile
+        print fontPath
+        tmpPrefix = "breakttc"
+        tempDir = tempfile.mkdtemp()
+
         print "==> Start breaking TTC."
 
         # Get packed family names
@@ -94,10 +100,11 @@ def main(argvs):
         print "==> Finish breaking TTC."
 
         print "===> Starting generate TTC."
+
         # set variables.
         newTTCname = fontFSName
         newFontPath = tempDir + "/" + newTTCname
-        saveFontPath = homeDir + "/" + saveDir + "/" + newTTCname
+        saveFontPath = saveDir + "/" + newTTCname
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
         fontX = []
 
@@ -141,10 +148,6 @@ def main(argvs):
         # 念のため temporary directory を掃除しておく。
         shutil.rmtree(tempDir)
         print "==> Finish all."
-    else:
-        print "==> File not found."
-        print "==> Please copy font file from Windows to %s." % workDir
-        print ""
 
 if __name__ == '__main__':
     main(sys.argv)
