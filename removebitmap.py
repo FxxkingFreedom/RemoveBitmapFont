@@ -147,7 +147,9 @@ def main(argvs):
 
         # 念のため temporary directory を掃除しておく。
         shutil.rmtree(tempDir)
-        print "=> Finish."
+        print "=> Cleanup temporary directory."
+
+    # Finish for:
     print "Finish all in dir."
 
 if __name__ == '__main__':
