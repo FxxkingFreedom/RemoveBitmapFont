@@ -37,6 +37,17 @@ def gasp():
 
 
 """
+@return: list
+"""
+def fontsSearch(dir, *exts):
+    files = []
+    dir = os.path.abspath(os.path.expanduser(dir))
+    for ext in exts:
+        files.extend(glob.glob(dir + '/' + ext))
+    return files
+
+
+"""
 Main function
 """
 def main(argvs):
@@ -58,8 +69,8 @@ def main(argvs):
         print "   eg. python %s ~/Downloads/fonts" % argvs[0]
         quit()
 
-    """ workDir 内の *.ttc を配列に入れて for で回す。 """
-    fontFiles = glob.glob(argvs[1]+'/*.ttc')
+    """ workDir 内の *.ttc を list に入れて for で回す。 """
+    fontFiles = fontsSearch(argvs[1], '*.ttc', '*.ttf')
 
     for fontFile in fontFiles:
         # set variables.

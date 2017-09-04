@@ -22,15 +22,16 @@ This script makes a core dump on old fontforge. So please install new fontforge.
 
 I confirm this script on EL Capitan, Sierra, High Sierra, WSL (Xenial), Raspberry Pi 3 (Jessie).
 
-### Step 1 (on Mac or on Linux)
+### Step 1 (on Mac or Linux or Windows)
 
 ```
-python removebitmap.py firname
+python removebitmap.py dirname
+
 ex)
 python removebitmap.py ~/Downloads/fonts
 ```
 
-### Step 2 (on Mac or on Linux and on Windows)
+### Step 2 (on Mac or Linux or Windows and on Windows)
 
 ```
 Move new fonts in ~/Downloads/fonts/new/ to Windows something folder.
