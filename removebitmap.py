@@ -69,9 +69,10 @@ def main(argvs):
         print "   eg. python %s ~/Downloads/fonts" % argvs[0]
         quit()
 
-    """ workDir 内の *.ttc を list に入れて for で回す。 """
+    # TrueType 系統のファイルを探す。
     fontFiles = fontsSearch(argvs[1], '*.ttc', '*.ttf')
 
+    # 見つかった TrueType 系統のファイルを順次変換する。
     for fontFile in fontFiles:
         # set variables.
         fontFSName = os.path.basename(fontFile)
