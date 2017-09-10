@@ -112,7 +112,6 @@ def main(argvs):
         print "=> Finish breaking TTC."
 
 
-        print "===> Start generate TTC."
         # set variables.
         newTTCname = fontFSName
         newFontPath = tempDir + "/" + newTTCname
@@ -120,7 +119,11 @@ def main(argvs):
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
         fontX = []
 
-        # fontX に複数の ttf を登録する。
+        """
+        fontX に複数の ttf を登録する。
+
+        @todo Raspberry Pi 3 だとメモリが足りなくて落ちるので対策が必要。
+        """
         for file in files:
             fontOpen = fontforge.open(file)
             fontX.append(fontOpen)
@@ -128,7 +131,9 @@ def main(argvs):
         # Generate TTC.
         # TTC を扱うから複数じゃないと続行しない。
         # やっぱり一つでもいいや。
+        print "===> Start generate TTC."
         if len(fontX) > 0:
+            # list の最初の object に merge するので、頭の一つを取り出す。
             f = fontX[0]
             fontX.pop(0)
 
