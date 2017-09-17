@@ -16,6 +16,7 @@ import subprocess
 
 # fontforge setting.
 fontforge.setPrefs('CoverageFormatsAllowed', 1)
+fontforge.setPrefs('UndoDepth', 0)
 
 
 # TTF flags
@@ -125,11 +126,11 @@ def main(argvs):
         @todo Raspberry Pi 3 だとメモリが足りなくて落ちるので対策が必要。
         """
         for file in files:
-            print "opening..."
+            print "opening %s..." % file
             fontOpen = fontforge.open(file)
-            print "opened."
+            print "opened %s." % file
             fontX.append(fontOpen)
-            print "appended."
+            print "appended %s." % file
 
         # Generate TTC.
         # TTC を扱うから複数じゃないと続行しない。
