@@ -125,14 +125,16 @@ def main(argvs):
         @todo Raspberry Pi 3 だとメモリが足りなくて落ちるので対策が必要。
         """
         for file in files:
+            print "opening..."
             fontOpen = fontforge.open(file)
+            print "opened."
             fontX.append(fontOpen)
+            print "appended."
 
         # Generate TTC.
         # TTC を扱うから複数じゃないと続行しない。
-        # やっぱり一つでもいいや。
         print "===> Start generate TTC."
-        if len(fontX) > 0:
+        if len(fontX) > 1:
             # list の最初の object に merge するので、頭の一つを取り出す。
             f = fontX[0]
             fontX.pop(0)
@@ -150,6 +152,13 @@ def main(argvs):
             else:
                 print "===> new TTC not found."
                 quit()
+        else if len(fontX) == 1:
+            f = fontX[0]
+            fontX.pop(0)
+            f.generate(newFontPath, flags=flags)
+
+            if os.path.exists(newFontPath):
+                shutil.move(newFontPath, saveFontPath)
         else:
             print "===> File not found or not enough fonts."
             quit()
