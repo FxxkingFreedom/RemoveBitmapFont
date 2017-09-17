@@ -152,7 +152,7 @@ def main(argvs):
             else:
                 print "===> new TTC not found."
                 quit()
-        else if len(fontX) == 1:
+        elif len(fontX) == 1:
             f = fontX[0]
             fontX.pop(0)
             f.generate(newFontPath, flags=flags)
