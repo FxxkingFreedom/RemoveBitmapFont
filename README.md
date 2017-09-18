@@ -12,7 +12,7 @@ Windows 10 Creators Update で ClearType が[TTF でも縦方向に Anti-Alias �
 
 This script makes a core dump on old fontforge. So please install new fontforge. Especially, fontforge in Ubuntu repository is 2012xxxx still.
 
-- Install fontforge (not 20170731 but 2016xxxx) with python extension.
+- Install fontforge with python extension.
 
    * If you use Mac, install fontforge via [homebrew](https://brew.sh).
    * If you use Linux or WSL, install fontforge via [linuxbrew](http://linuxbrew.sh). See [here](./howto-install-fontforge.md).

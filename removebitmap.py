@@ -77,20 +77,19 @@ def main(argvs):
     for fontFile in fontFiles:
         # set variables.
         fontFSName = os.path.basename(fontFile)
-        fontPath = fontFile
         tmpPrefix = "breakttc"
         tempDir = tempfile.mkdtemp()
 
-        print "=> Start breaking TTC."
+        print "Start breaking TTC."
         # Get packed family names
-        familyNames = fontforge.fontsInFile(fontPath)
+        familyNames = fontforge.fontsInFile(fontFile)
         i = 0
 
         # Break a TTC to some TTFs.
         for familyName in familyNames:
             # openName format: "msgothic.ttc(MS UI Gothic)"
-            print "==> %s" % familyName
-            openName = "%s(%s)" % (fontPath, familyName)
+            print "%s" % familyName
+            openName = "%s(%s)" % (fontFile, familyName)
 
             # tmp file name: breakttf0a.ttf and breakttf1a.ttf and so on.
             tmpTTF = "%s%da.ttf" % (tmpPrefix, i)
@@ -109,49 +108,44 @@ def main(argvs):
             font.generate(tempDir + "/" + tmpTTF, flags=flags)
             font.close()
             i += 1
-        print "=> Finish breaking TTC."
+        print "Finish breaking TTC."
 
 
+        print "Start generate TTC."
         # set variables.
         newTTCname = fontFSName
         newFontPath = tempDir + "/" + newTTCname
         saveFontPath = saveDir + "/" + newTTCname
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
 
-        """
-        @todo Raspberry Pi 3 だとメモリが足りなくて落ちるので対策が必要。
-        """
         f = fontforge.open(files[0])
         files.pop(0)
 
-        print "===> Start generate TTC."
-
+        # TTC の場合 pop しても一つ以上残るはず。
         if len(files) > 0:
+            # 残りの ttf を最初の ttf に追加する。
             for file in files:
+                # Raspberry Pi 3 は複数開くとメモリが足りなくて落ちるので注意。
                 f2 = fontforge.open(file)
                 f.generateTtc(newFontPath, f2, ttcflags=("merge",), layer=1)
                 f2.close()
-
-            # temporary 内の ttc ファイルを保存先へ移動する。
-            if os.path.exists(newFontPath):
-                shutil.move(newFontPath, saveFontPath)
-
         # TTF の場合 pop して一つ減ってるから 0 になるはず。
         elif len(files) == 0:
             f.generate(newFontPath, flags=flags)
 
-            if os.path.exists(newFontPath):
-                shutil.move(newFontPath, saveFontPath)
-
-        # 新しく生成した分のフォントも閉じる。
+        # 新しく生成した分のフォントを閉じる。
         f.close()
-        print "===> Finish generate TTC."
+        print "Finish generate TTC."
 
-        # 念のため temporary directory を掃除しておく。
+        # temporary 内の ttc ファイルを保存先へ移動する。
+        if os.path.exists(newFontPath):
+            shutil.move(newFontPath, saveFontPath)
+
+        # temporary directory を掃除しておく。
         shutil.rmtree(tempDir)
-        print "=> Cleanup temporary directory."
+        print "Cleanup temporary directory."
 
-    # Finish for:
+    # Finish
     print "Finish all in dir."
 
 if __name__ == '__main__':

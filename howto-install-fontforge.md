@@ -4,7 +4,8 @@
 
 1. sudo vi /etc/dphys-swapfile
 ```
-CONF_SWAPSIZE=4096
+ex)
+CONF_SWAPSIZE=2048
 ```
 1. sudo systemctl stop dphys-swapfile
 1. sudo systemctl start dphys-swapfile
