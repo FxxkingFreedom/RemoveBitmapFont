@@ -2,6 +2,12 @@
 
 ## For Raspberry Pi 3 Jessie
 
+1. sudo vi /etc/dphys-swapfile
+```
+CONF_SWAPSIZE=4096
+```
+1. sudo systemctl stop dphys-swapfile
+1. sudo systemctl start dphys-swapfile
 1. sudo apt-get update
 1. sudo apt-get upgrade
 1. sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev libglib2.0 libglib2.0-dev

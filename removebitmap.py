@@ -81,7 +81,6 @@ def main(argvs):
         tmpPrefix = "breakttc"
         tempDir = tempfile.mkdtemp()
 
-
         print "=> Start breaking TTC."
         # Get packed family names
         familyNames = fontforge.fontsInFile(fontPath)
@@ -118,55 +117,31 @@ def main(argvs):
         newFontPath = tempDir + "/" + newTTCname
         saveFontPath = saveDir + "/" + newTTCname
         files = glob.glob(tempDir + "/" + tmpPrefix + '[0-9]a.ttf')
-        fontX = []
 
         """
-        fontX に複数の ttf を登録する。
-
         @todo Raspberry Pi 3 だとメモリが足りなくて落ちるので対策が必要。
         """
-        for file in files:
-            print "opening %s..." % file
-            fontOpen = fontforge.open(file)
-            print "opened %s." % file
-            fontX.append(fontOpen)
-            print "appended %s." % file
+        f = fontforge.open(files[0])
+        files.pop(0)
 
-        # Generate TTC.
-        # TTC を扱うから複数じゃないと続行しない。
         print "===> Start generate TTC."
-        if len(fontX) > 1:
-            # list の最初の object に merge するので、頭の一つを取り出す。
-            f = fontX[0]
-            fontX.pop(0)
 
-            # fontX の中の複数の ttf を一つの ttc にする。
-            f.generateTtc(newFontPath,
-                          (fontX),
-                          ttcflags=("merge",),
-                          layer=1
-            )
+        if len(files) > 0:
+            for file in files:
+                f2 = fontforge.open(file)
+                f.generateTtc(newFontPath, f2, ttcflags=("merge",), layer=1)
+                f2.close()
 
             # temporary 内の ttc ファイルを保存先へ移動する。
             if os.path.exists(newFontPath):
                 shutil.move(newFontPath, saveFontPath)
-            else:
-                print "===> new TTC not found."
-                quit()
-        elif len(fontX) == 1:
-            f = fontX[0]
-            fontX.pop(0)
+
+        # TTF の場合 pop して一つ減ってるから 0 になるはず。
+        elif len(files) == 0:
             f.generate(newFontPath, flags=flags)
 
             if os.path.exists(newFontPath):
                 shutil.move(newFontPath, saveFontPath)
-        else:
-            print "===> File not found or not enough fonts."
-            quit()
-
-        # 開いたフォントをそれぞれ閉じる。
-        for openedFont in fontX:
-            openedFont.close()
 
         # 新しく生成した分のフォントも閉じる。
         f.close()
