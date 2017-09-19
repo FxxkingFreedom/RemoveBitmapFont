@@ -4,7 +4,6 @@
 
 1. sudo vi /etc/dphys-swapfile
 ```
-ex)
 CONF_SWAPSIZE=2048
 ```
 1. sudo systemctl stop dphys-swapfile
@@ -42,6 +41,8 @@ Windows だけで完結するのが嬉しい。[^4]
 
 [^2]: configure のオプションに --prefix=/usr を入れた場合、この行は恐らく不必要。
 
-[^3]: libxml2 の make check でエラーが起きるので「2: ignore」を選択してください。make check 自体がおかしいだけでバイナリは正常です。もし symlink error が起きたらやはり「2: ignore」を選んでください。どうも Mac 用に /Applications に fontforge.app の symlink を張ろうとして失敗するようです。("-vd" 付けないとエラー時に選択が出てきません。)
+[^3]: libxml2 の make check でエラーが起きるので「2: ignore」を選択してください。make check 自体がおかしいだけでバイナリは正常です。もし symlink error が起きたらやはり「2: ignore」を選んでください。どうも Mac 用に /Applications に fontforge.app の symlink を張ろうとして失敗するようです。"-vd" 付けないとエラー時に選択が出てきません。なお、既にインストールしていたら、
+
+brew upgrade -vd fontforge
 
 [^4]: WSL から /mnt/c/*/ に mv || cp できるので大変便利。
